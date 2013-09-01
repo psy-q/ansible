@@ -1,0 +1,13 @@
+- hosts: webservers
+  user: root
+  tasks:
+    - name: Install PHP5
+      apt: pkg=libapache2-mod-php5 state=installed
+    - name: Install GraphicsMagick
+      apt: pkg=graphicsmagick state=installed
+    - name: Install MySQL modules for PHP
+      apt: pkg=php5-mysql state=installed
+    - name: Install MariaDB server
+      apt: pkg=mariadb-server-5.5 state=installed
+    - name: Enable mod_rewrite
+      command: a2enmod rewrite
