@@ -1,5 +1,2 @@
-- hosts: webservers
-  user: root
-  tasks:
-    - name: Installs Apache
-      action: apt pkg=apache2 state=installed update_cache=true
+- name: Installs Apache
+  action: apt pkg=apache2 state=installed update_cache=true
