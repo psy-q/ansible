@@ -2,6 +2,8 @@
 www.psy-q.ch
 tc.psy-q.ch
 
-
 [webservers]
+www.psy-q.ch
+
+[owncloud_servers]
 www.psy-q.ch

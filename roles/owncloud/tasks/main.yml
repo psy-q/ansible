@@ -1,0 +1,9 @@
+---
+- name: Install requirements for managing repos via Ansible
+  apt: pkg=python-apt state=installed
+- name: Install requirements for managing repos via Ansible
+  apt: pkg=python-pycurl state=installed
+- name: Add ownCloud's official repository
+  apt_repository: repo='deb http://download.opensuse.org/repositories/isv:ownCloud:community/Debian_7.0/ /' state=present
+- name: Install ownCloud and keep it fresh
+  apt: pkg=owncloud state=installed update_cache=true
