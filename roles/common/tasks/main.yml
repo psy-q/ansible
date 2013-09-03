@@ -1,10 +1,6 @@
+- name: Install python-apt (for the Ansible apt module)
+  command: apt-get --assume-yes install python-apt
 - name: Install lsb-release
   apt: pkg=lsb-release state=installed update_cache=true
-- name: Install requirements for managing repos via Ansible (python-apt)
-  apt: pkg=python-apt state=installed update_cache=true
-  when: ansible_lsb.codename == "wheezy"
-  #when: ansible_os_family == "Debian" and ansible_lsb.major_release|int >= 7
 - name: Install requirements for managing repos via Ansible (python-pycurl)
   apt: pkg=python-pycurl state=installed update_cache=true
-  when: ansible_lsb.codename == "wheezy"
-  #when: ansible_os_family == "Debian" and ansible_lsb.major_release|int >= 7
