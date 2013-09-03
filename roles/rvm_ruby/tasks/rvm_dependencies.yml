@@ -1,0 +1,9 @@
+---
+- name: Install Ruby compilation dependencies
+  apt: pkg={{ item }} state=present
+  with_items:
+    - build-essential
+    - curl
+    - bash
+  tags:
+    - packages

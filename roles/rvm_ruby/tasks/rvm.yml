@@ -1,0 +1,17 @@
+---
+- name: Check if RVM is installed
+  command: rvm --version
+  register: rvm_installed
+
+- name: Install RVM
+  shell: curl -L https://get.rvm.io | bash -s stable
+  when: rvm_installed|failed
+
+- name: Install Ruby
+  shell: rvm install 1.9.3
+  register: ruby_installed
+  when: rvm_installed|success
+
+- name: Set default Ruby
+  shell: rvm alias create default 1.9.3
+  when: ruby_installed|success
