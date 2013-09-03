@@ -1,0 +1,4 @@
+- name: Install requirements for managing repos via Ansible
+  apt: pkg=python-apt state=installed
+- name: Install requirements for managing repos via Ansible
+  apt: pkg=python-pycurl state=installed

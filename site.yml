@@ -1,3 +1,5 @@
 ---
 - include: webservers.yml
+- include: wordpress_servers.yml
 - include: owncloud_servers.yml
+- include: mariadb_servers.yml

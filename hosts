@@ -7,3 +7,9 @@ www.psy-q.ch
 
 [owncloud_servers]
 www.psy-q.ch
+
+[wordpress_servers]
+www.psy-q.ch
+
+[mariadb_servers]
+www.psy-q.ch
