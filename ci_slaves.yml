@@ -1,0 +1,4 @@
+---
+- hosts: ci_slaves
+  roles:
+    - ci_slaves

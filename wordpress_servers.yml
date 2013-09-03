@@ -1,5 +1,4 @@
 ---
 - hosts: wordpress_servers
   roles:
-    - webservers
     - wordpress

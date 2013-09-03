@@ -1,0 +1,19 @@
+---
+- name: Add the Iceweasel repository
+  apt_repository: repo='deb http://mozilla.debian.net/ wheezy-backports iceweasel-release' state=present
+- name: Install Iceweasel
+  apt: pkg=iceweasel state=installed update_cache=true
+- name: Install VNC server
+  apt: pkg=tightvncserver state=installed update_cache=true
+- name: Install Fluxbox
+  apt: pkg=fluxbox state=installed update_cache=true
+- name: Install xbase-clients
+  apt: pkg=xbase-clients state=installed update_cache=true
+- name: Install Java (OpenJDK)
+  apt: pkg=openjdk-7-jre state=installed
+- name: Install unzip
+  apt: pkg=unzip state=installed
+- name: Install zip
+  apt: pkg=zip state=installed
+- name: Install Chromium
+  apt: pkg=chromium state=installed

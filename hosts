@@ -3,7 +3,7 @@ www.psy-q.ch
 tc.psy-q.ch
 
 [webservers]
-www.psy-q.ch
+rails.zhdk.ch
 
 [owncloud_servers]
 www.psy-q.ch
@@ -13,3 +13,9 @@ www.psy-q.ch
 
 [mariadb_servers]
 www.psy-q.ch
+cislave1.zhdk.ch
+cislave2.zhdk.ch
+
+[ci_slaves]
+cislave1.zhdk.ch
+cislave2.zhdk.ch

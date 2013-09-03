@@ -1,5 +1,4 @@
 ---
 - hosts: owncloud_servers
   roles:
-    - webservers
     - owncloud

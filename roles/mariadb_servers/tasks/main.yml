@@ -11,3 +11,7 @@
   apt: pkg=libmariadbclient-dev state=installed update_cache=true
 - name: Install MariaDB client library
   apt: pkg=libmariadbclient18 state=installed update_cache=true
+- name: Make sure MySQL server is absent
+  apt: pkg=mysql-server state=absent
+- name: Make sure MySQL server (explicit version) is absent
+  apt: pkg=mysql-server-5.5 state=absent
