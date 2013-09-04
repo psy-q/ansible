@@ -19,3 +19,7 @@ cislave2.zhdk.ch
 [ci_slaves]
 cislave1.zhdk.ch
 cislave2.zhdk.ch
+
+
+[vagrant]
+192.168.10.10

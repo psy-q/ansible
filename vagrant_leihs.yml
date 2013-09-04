@@ -1,0 +1,13 @@
+---
+- hosts: vagrant
+  user: vagrant
+  sudo: True
+  roles:
+    - ci_slaves
+    - mariadb_servers
+    - rails_servers
+  tasks:
+    - include: tasks/leihs_packages.yml
+    - include: tasks/leihs_virtual_host.yml
+  handlers:
+    - include: roles/webservers/handlers/main.yml
