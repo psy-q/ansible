@@ -1,6 +1,6 @@
 ---
 - name: Check if RVM is installed
-  command: rvm --version
+  command: bash -l -c 'rvm --version'
   register: rvm_is_installed
   ignore_errors: True
 
