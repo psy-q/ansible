@@ -31,3 +31,7 @@
 - name: Configure locales
   command: dpkg-reconfigure locales
   environment: "{{ locale_env }}"
+- name: Install vim-nox
+  apt: pkg=vim-nox state=installed
+- name: Configure vim as default editor
+  command: update-alternatives --set editor /usr/bin/vim.nox 
