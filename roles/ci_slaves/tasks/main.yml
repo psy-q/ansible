@@ -1,6 +1,11 @@
 ---
 - name: Add the Iceweasel repository
   apt_repository: repo='deb http://mozilla.debian.net/ wheezy-backports iceweasel-release' state=present
+- name: Install Mozilla Debian GPG key package
+  apt: pkg=pkg-mozilla-archive-keyring state=installed update_cache=true
+- name: Install Mozilla GPG key
+  command: gpg --check-sigs --fingerprint --keyring /etc/apt/trusted.gpg.d/pkg-mozilla-archive-keyring.gpg --keyring /usr/share/keyrings/debian-keyring.gpg pkg-mozilla-maintainers
+  ignore_errors: True
 - name: Install Iceweasel
   apt: pkg=iceweasel state=installed update_cache=true
 - name: Install VNC server
@@ -17,3 +22,12 @@
   apt: pkg=zip state=installed
 - name: Install Chromium
   apt: pkg=chromium state=installed
+- copy: src=locale.sh dest=/etc/profile.d/locale.sh mode=775
+- name: Install locales
+  apt: pkg=locales state=installed
+  environment: "{{ locale_env }}"
+- lineinfile: dest=/etc/locale.gen state=present regexp='^en_GB.UTF-8 UTF_8' line='en_GB.UTF-8 UTF-8'
+- lineinfile: dest=/etc/locale.gen state=absent regexp='^# en_GB.UTF-8 UTF-8'
+- name: Configure locales
+  command: dpkg-reconfigure locales
+  environment: "{{ locale_env }}"
