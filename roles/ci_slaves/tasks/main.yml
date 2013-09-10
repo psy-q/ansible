@@ -77,3 +77,23 @@
   command: mv chromedriver /usr/local/bin chdir=/tmp
 - name: Change mode of chromedriver to be executable
   file: path=/usr/local/bin/chromedriver mode=755
+- name: Install PostgreSQL
+  apt: pkg={{ item }} state=present
+  with_items:
+    - postgresql
+    - postgresql-client
+    - libpq-dev
+    - postgresql-contrib
+    - python-psycopg2
+- name: Create jenkins PostgreSQL user
+  postgresql_user: name=jenkins password=jenkins
+  sudo: True
+  sudo_user: postgres
+- name: Give jenkins a PostgreSQL database
+  postgresql_db: name=jenkins owner=jenkins state=present
+  sudo: True
+  sudo_user: postgres
+- name: Switch of PostgreSQL security
+  copy: src=pg_hba_no_security.conf dest=/etc/postgresql/9.1/main/pg_hba.conf
+  notify:
+    - restart postgresql
