@@ -24,6 +24,8 @@
   apt: pkg=chromium state=installed
 - name: Install Curl
   apt: pkg=curl state=installed
+
+
 - copy: src=locale.sh dest=/etc/profile.d/locale.sh mode=775
 - name: Install locales
   apt: pkg=locales state=installed
@@ -33,10 +35,14 @@
 - name: Configure locales
   command: dpkg-reconfigure locales
   environment: "{{ locale_env }}"
+
+
 - name: Install vim-nox
   apt: pkg=vim-nox state=installed
 - name: Configure vim as default editor
   command: update-alternatives --set editor /usr/bin/vim.nox 
+
+
 - name: Install ntpdate
   apt: pkg=ntpdate state=installed
 - name: Stop NTP service. Need to do this before you attempt one-time ntpdate use
@@ -49,8 +55,11 @@
   copy: src=ntp.conf dest=/etc/ntp.conf
 - name: Run NTP service
   service: name=ntp state=started
+
+
 - name: Create jenkins user
   user: name=jenkins state=present
+
 # Need to improve below by storing those keys somewhere central.
 - name: Install root SSH keys
   authorized_key: user=root key={{ item }} state=present
@@ -67,16 +76,27 @@
     - ../../../files/ssh_keys/franco.pub
     - ../../../files/ssh_keys/sebastian.pub
     - ../../../files/ssh_keys/matus.pub
+
 - name: Make sure no chromedriver is in /tmp
   file: path=/tmp/chromedriver state=absent
 - name: Download chromedriver
-  shell: curl https://chromedriver.googlecode.com/files/chromedriver_linux64_26.0.1383.0.zip > chromedriver.zip chdir=/tmp
+  shell: curl https://chromedriver.googlecode.com/files/chromedriver_linux{{  ansible_userspace_bits  }}_26.0.1383.0.zip > chromedriver.zip chdir=/tmp
 - name: Unzip chromedriver
   command: unzip chromedriver.zip chdir=/tmp
 - name: Stick chromedriver somewhere in the PATH
   command: mv chromedriver /usr/local/bin chdir=/tmp
 - name: Change mode of chromedriver to be executable
   file: path=/usr/local/bin/chromedriver mode=755
+
+
+- name: Download PhantomJS
+  shell: curl https://phantomjs.googlecode.com/files/phantomjs-1.9.0-linux-{{ ansible_machine }}.tar.bz2 | tar xj chdir=/tmp
+- name: Stick PhantomJS somewhere in the PATH
+  command: cp phantomjs-1.9.0-linux-{{ ansible_machine }}/bin/phantomjs /usr/local/bin/ chdir=/tmp
+- name: Change mode of PhantomJS to be executable
+  file: path=/usr/local/bin/phantomjs mode=755
+
+
 - name: Install PostgreSQL
   apt: pkg={{ item }} state=present
   with_items:
