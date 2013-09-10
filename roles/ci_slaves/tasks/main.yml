@@ -22,6 +22,8 @@
   apt: pkg=zip state=installed
 - name: Install Chromium
   apt: pkg=chromium state=installed
+- name: Install Curl
+  apt: pkg=curl state=installed
 - copy: src=locale.sh dest=/etc/profile.d/locale.sh mode=775
 - name: Install locales
   apt: pkg=locales state=installed
@@ -35,3 +37,43 @@
   apt: pkg=vim-nox state=installed
 - name: Configure vim as default editor
   command: update-alternatives --set editor /usr/bin/vim.nox 
+- name: Install ntpdate
+  apt: pkg=ntpdate state=installed
+- name: Stop NTP service. Need to do this before you attempt one-time ntpdate use
+  service: name=ntp state=stopped
+- name: One-time setting of date and time via ntpdate
+  command: ntpdate ntp.zhdk.ch
+- name: Install ntp
+  apt: pkg=ntp state=installed
+- name: Set up ntp
+  copy: src=ntp.conf dest=/etc/ntp.conf
+- name: Run NTP service
+  service: name=ntp state=started
+- name: Create jenkins user
+  user: name=jenkins state=present
+# Need to improve below by storing those keys somewhere central.
+- name: Install root SSH keys
+  authorized_key: user=root key={{ item }} state=present
+  with_file:
+    - ../../../files/ssh_keys/rca.pub
+    - ../../../files/ssh_keys/thomas.pub
+    - ../../../files/ssh_keys/franco.pub
+    - ../../../files/ssh_keys/sebastian.pub
+- name: Install jenkins SSH keys
+  authorized_key: user=jenkins key={{ item }} state=present
+  with_file:
+    - ../../../files/ssh_keys/rca.pub
+    - ../../../files/ssh_keys/thomas.pub
+    - ../../../files/ssh_keys/franco.pub
+    - ../../../files/ssh_keys/sebastian.pub
+    - ../../../files/ssh_keys/matus.pub
+- name: Make sure no chromedriver is in /tmp
+  file: path=/tmp/chromedriver state=absent
+- name: Download chromedriver
+  shell: curl https://chromedriver.googlecode.com/files/chromedriver_linux64_26.0.1383.0.zip > chromedriver.zip chdir=/tmp
+- name: Unzip chromedriver
+  command: unzip chromedriver.zip chdir=/tmp
+- name: Stick chromedriver somewhere in the PATH
+  command: mv chromedriver /usr/local/bin chdir=/tmp
+- name: Change mode of chromedriver to be executable
+  file: path=/usr/local/bin/chromedriver mode=755
