@@ -58,7 +58,7 @@
 
 
 - name: Create jenkins user
-  user: name=jenkins state=present
+  user: name=jenkins shell=/bin/bash state=present
 
 # Need to improve below by storing those keys somewhere central.
 - name: Install root SSH keys
@@ -117,3 +117,30 @@
   copy: src=pg_hba_no_security.conf dest=/etc/postgresql/9.1/main/pg_hba.conf
   notify:
     - restart postgresql
+
+
+- name: Install packages for rbenv
+  apt: pkg={{ item }} state=present
+  with_items:
+    - git
+    - libreadline-dev
+    - libreadline6-dev
+    - libssl-dev
+    - libxslt1-dev
+    - libxml2-dev
+    - build-essential
+    - zlib1g-dev
+- name: Install rbenv
+  sudo: True
+  sudo_user: jenkins
+  shell: curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash executable=/bin/bash
+- name: Install ruby-build so you can install Rubies through rbenv
+  sudo: True
+  sudo_user: jenkins
+  git: repo=https://github.com/sstephenson/ruby-build.git dest=/home/jenkins/.rbenv/plugins/ruby-build
+- name: Install rbenv profile snippet
+  copy: src=rbenv.sh dest=/etc/profile.d/rbenv.sh
+#- name: Install rbenv rubies
+#  sudo: True
+#  sudo_user: jenkins
+#  shell: RBENV_ROOT=/home/jenkins/.rbenv rbenv install jruby-1.7.3 executable=/bin/bash
