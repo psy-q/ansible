@@ -1,6 +1,8 @@
 - name: Install python-apt (for the Ansible apt module)
   command: apt-get --assume-yes install python-apt
+
 - name: Install lsb-release
   apt: pkg=lsb-release state=installed update_cache=true
+
 - name: Install requirements for managing repos via Ansible (python-pycurl)
   apt: pkg=python-pycurl state=installed update_cache=true

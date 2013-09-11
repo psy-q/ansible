@@ -17,6 +17,7 @@
   ignore_errors: True
 - name: Install rbenv globally
   git: repo=https://github.com/sstephenson/rbenv.git dest={{ rbenv_root }}
+  register: rbenv_has_been_installed
   when: rbenv_is_installed|failed
 - name: Install ruby-build so you can install Rubies through rbenv
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{ rbenv_root }}/plugins/ruby-build
@@ -31,7 +32,7 @@
 
 - name: Install rbenv Ruby {{ ruby_version }}
   command: executable=/bin/bash bash -l -c 'rbenv install {{ ruby_version }}'
-  when: rbenv_is_installed|success and ruby_is_installed|failed
+  when: (rbenv_is_installed|success or rbenv_has_been_installed|success) and ruby_is_installed|failed
   register: ruby_has_been_installed
 
 - name: Check if Ruby {{ ruby_version }} has Bundler

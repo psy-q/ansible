@@ -8,6 +8,8 @@
   ignore_errors: True
 - name: Install Iceweasel
   apt: pkg=iceweasel state=installed update_cache=true
+
+
 - name: Install VNC server
   apt: pkg=tightvncserver state=installed update_cache=true
 - name: Install Fluxbox
@@ -68,6 +70,7 @@
     - ../../../files/ssh_keys/thomas.pub
     - ../../../files/ssh_keys/franco.pub
     - ../../../files/ssh_keys/sebastian.pub
+
 - name: Install jenkins SSH keys
   authorized_key: user=jenkins key={{ item }} state=present
   with_file:
