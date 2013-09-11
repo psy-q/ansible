@@ -10,6 +10,7 @@
     - libxml2-dev
     - build-essential
     - zlib1g-dev
+    - openjdk-7-jre
 - name: Check if rbenv is installed
   command: ls {{ rbenv_root }} 
   register: rbenv_is_installed
