@@ -1,0 +1,4 @@
+---
+- hosts: rails_servers
+  roles:
+    - rails_servers

@@ -120,8 +120,6 @@
   copy: src=pg_hba_no_security.conf dest=/etc/postgresql/9.1/main/pg_hba.conf
   notify:
     - restart postgresql
-- include: rbenv_ruby.yml ruby_version=1.9.3-p448
-- include: rbenv_ruby.yml ruby_version=jruby-1.7.2
 - name: Set default Ruby 
   command: executable=/bin/bash bash -l -c 'rbenv global 1.9.3-p448'
   when: rbenv_is_installed|success

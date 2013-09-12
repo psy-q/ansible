@@ -6,19 +6,25 @@
 
 - name: Install RVM
   shell: curl -L https://get.rvm.io | bash -s stable
-  register: rvm_has_been_installed
   when: rvm_is_installed|failed
+  register: rvm_has_been_installed
 
-- name: Install Ruby
-  command: bash -l -c 'rvm install 1.9.3'
+- name: Check if Ruby {{ ruby_version }} is installed
+  command: bash -l -c 'rvm list | grep {{ ruby_version }}'
+  register: ruby_is_installed
+  ignore_errors: True
+
+- name: Install RVM Ruby {{ ruby_version }}
+  command: executable=/bin/bash bash -l -c 'rvm install {{ ruby_version }}'
+  when: (rvm_is_installed|success or rvm_has_been_installed|success) and ruby_is_installed|failed
   register: ruby_has_been_installed
-  when: rvm_is_installed|success
 
-- name: Install Ruby
-  command: bash -l -c 'rvm install 1.9.3'
-  register: ruby_installed
-  when: rvm_has_been_installed|success
+- name: Check if Ruby {{ ruby_version }} has Bundler
+  command: executable=/bin/bash bash -l -c 'rvm use {{ ruby_version }} && gem list bundler | grep bundler'
+  when: rvm_is_installed|success and (ruby_is_installed|success or ruby_has_been_installed|success)
+  register: bundler_is_installed
+  ignore_errors: True
 
-- name: Set default Ruby
-  command: bash -l -c 'rvm alias create default 1.9.3'
-  when: ruby_installed|success
+- name: Install bundler for Ruby {{ ruby_version }}
+  command: executable=/bin/bash bash -l -c 'rvm use {{ ruby_version }} && gem install bundler'
+  when: bundler_is_installed|failed

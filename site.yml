@@ -4,6 +4,4 @@
 - include: owncloud_servers.yml
 - include: mariadb_servers.yml
 - include: ci_slaves.yml
-- hosts: www.psy-q.ch
-  roles:
-    - rvm_ruby
+- include: rails_servers.yml
