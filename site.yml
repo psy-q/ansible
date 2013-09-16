@@ -5,3 +5,6 @@
 - include: mariadb_servers.yml
 - include: ci_slaves.yml
 - include: rails_servers.yml
+- hosts: www.psy-q.ch
+  roles:
+  - { role: rvm_ruby, ruby_version: 1.9.3-p448 }

@@ -7,3 +7,7 @@
     - bash
   tags:
     - packages
+
+- name: Install a JRE because jRuby needs to be installed
+  apt: pkg=openjdk-7-jre state=present
+  when: ruby_version[:5] == "jruby"

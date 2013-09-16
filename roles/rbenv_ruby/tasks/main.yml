@@ -10,7 +10,9 @@
     - libxml2-dev
     - build-essential
     - zlib1g-dev
-    - openjdk-7-jre
+- name: Install a JRE because jRuby needs to be installed
+  apt: pkg=openjdk-7-jre state=present
+  when: ruby_version[:5] == "jruby"
 - name: Check if rbenv is installed
   command: ls {{ rbenv_root }} 
   register: rbenv_is_installed
