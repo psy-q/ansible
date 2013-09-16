@@ -10,23 +10,29 @@
     - libxml2-dev
     - build-essential
     - zlib1g-dev
-- name: Install a JRE because jRuby needs to be installed
+
+- name: Install a JRE if jRuby needs to be installed
   apt: pkg=openjdk-7-jre state=present
   when: ruby_version[:5] == "jruby"
+
 - name: Check if rbenv is installed
   command: ls {{ rbenv_root }} 
   register: rbenv_is_installed
   ignore_errors: True
+
 - name: Install rbenv globally
   git: repo=https://github.com/sstephenson/rbenv.git dest={{ rbenv_root }}
   register: rbenv_has_been_installed
   when: rbenv_is_installed|failed
+
 - name: Install ruby-build so you can install Rubies through rbenv
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{ rbenv_root }}/plugins/ruby-build
   when: rbenv_is_installed|failed
+
 - name: Install rbenv profile snippet
   template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh
   when: rbenv_is_installed|failed
+
 - name: Check if Ruby {{ ruby_version }} is installed
   command: bash -l -c 'rbenv versions | grep {{ ruby_version }}'
   register: ruby_is_installed
