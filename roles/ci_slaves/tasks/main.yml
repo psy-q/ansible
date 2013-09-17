@@ -1,63 +1,9 @@
 ---
-- name: Add the Iceweasel repository
-  apt_repository: repo='deb http://mozilla.debian.net/ wheezy-backports iceweasel-release' state=present
-- name: Install Mozilla Debian GPG key package
-  apt: pkg=pkg-mozilla-archive-keyring state=installed update_cache=true
-- name: Install Mozilla GPG key
-  command: gpg --check-sigs --fingerprint --keyring /etc/apt/trusted.gpg.d/pkg-mozilla-archive-keyring.gpg --keyring /usr/share/keyrings/debian-keyring.gpg pkg-mozilla-maintainers
-  ignore_errors: True
-- name: Install Iceweasel
-  apt: pkg=iceweasel state=installed update_cache=true
-
-
-- name: Install VNC server
-  apt: pkg=tightvncserver state=installed update_cache=true
-- name: Install Fluxbox
-  apt: pkg=fluxbox state=installed update_cache=true
-- name: Install xbase-clients
-  apt: pkg=xbase-clients state=installed update_cache=true
-- name: Install Java (OpenJDK)
-  apt: pkg=openjdk-7-jre state=installed
-- name: Install unzip
-  apt: pkg=unzip state=installed
-- name: Install zip
-  apt: pkg=zip state=installed
-- name: Install Chromium
-  apt: pkg=chromium state=installed
-- name: Install Curl
-  apt: pkg=curl state=installed
-
-
-- copy: src=locale.sh dest=/etc/profile.d/locale.sh mode=775
-- name: Install locales
-  apt: pkg=locales state=installed
-  environment: "{{ locale_env }}"
-- lineinfile: dest=/etc/locale.gen state=present regexp='^en_GB.UTF-8 UTF_8' line='en_GB.UTF-8 UTF-8'
-- lineinfile: dest=/etc/locale.gen state=absent regexp='^# en_GB.UTF-8 UTF-8'
-- name: Configure locales
-  command: dpkg-reconfigure locales
-  environment: "{{ locale_env }}"
-
-
-- name: Install vim-nox
-  apt: pkg=vim-nox state=installed
-- name: Configure vim as default editor
-  command: update-alternatives --set editor /usr/bin/vim.nox 
-
-
-- name: Install ntp
-  apt: pkg=ntp state=installed
-- name: Install ntpdate
-  apt: pkg=ntpdate state=installed
-- name: Stop NTP service. Need to do this before you attempt one-time ntpdate use
-  service: name=ntp state=stopped
-- name: One-time setting of date and time via ntpdate
-  command: ntpdate ntp.zhdk.ch
-- name: Set up ntp
-  copy: src=ntp.conf dest=/etc/ntp.conf
-- name: Run NTP service
-  service: name=ntp state=started
-
+- include: iceweasel.yml
+- include: packages.yml
+- include: locale.yml
+- include: vim.yml
+- include: ntp.yml
 
 - name: Create jenkins user
   user: name=jenkins shell=/bin/bash state=present
@@ -80,46 +26,10 @@
     - ../../../files/ssh_keys/sebastian.pub
     - ../../../files/ssh_keys/matus.pub
 
-- name: Make sure no chromedriver is in /tmp
-  file: path=/tmp/chromedriver state=absent
-- name: Download chromedriver
-  shell: curl https://chromedriver.googlecode.com/files/chromedriver_linux{{  ansible_userspace_bits  }}_26.0.1383.0.zip > chromedriver.zip chdir=/tmp
-- name: Unzip chromedriver
-  command: unzip chromedriver.zip chdir=/tmp
-- name: Stick chromedriver somewhere in the PATH
-  command: mv chromedriver /usr/local/bin chdir=/tmp
-- name: Change mode of chromedriver to be executable
-  file: path=/usr/local/bin/chromedriver mode=755
+- include: chromedriver.yml
+- include: phantomjs.yml
+- include: postgresql.yml
 
-
-- name: Download PhantomJS
-  shell: curl https://phantomjs.googlecode.com/files/phantomjs-1.9.0-linux-{{ ansible_machine }}.tar.bz2 | tar xj chdir=/tmp
-- name: Stick PhantomJS somewhere in the PATH
-  command: cp phantomjs-1.9.0-linux-{{ ansible_machine }}/bin/phantomjs /usr/local/bin/ chdir=/tmp
-- name: Change mode of PhantomJS to be executable
-  file: path=/usr/local/bin/phantomjs mode=755
-
-
-- name: Install PostgreSQL
-  apt: pkg={{ item }} state=present
-  with_items:
-    - postgresql
-    - postgresql-client
-    - libpq-dev
-    - postgresql-contrib
-    - python-psycopg2
-- name: Create jenkins PostgreSQL user
-  postgresql_user: name=jenkins password=jenkins
-  sudo: True
-  sudo_user: postgres
-- name: Give jenkins a PostgreSQL database
-  postgresql_db: name=jenkins owner=jenkins state=present
-  sudo: True
-  sudo_user: postgres
-- name: Switch of PostgreSQL security
-  copy: src=pg_hba_no_security.conf dest=/etc/postgresql/9.1/main/pg_hba.conf
-  notify:
-    - restart postgresql
 - name: Set default Ruby 
   command: executable=/bin/bash bash -l -c 'rbenv global 1.9.3-p448'
   when: rbenv_is_installed|success

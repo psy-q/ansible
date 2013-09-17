@@ -1,9 +1,10 @@
 ---
-- hosts: vagrant
-  user: vagrant
-  sudo: True
-  tasks:
-  - name: Add the Iceweasel repository
-    apt_repository: repo='deb http://mozilla.debian.net/ wheezy-backports iceweasel-release' state=present
-  - name: Install Iceweasel and keep it fresh
-    apt: pkg=iceweasel state=installed update_cache=true
+- name: Add the Iceweasel repository
+  apt_repository: repo='deb http://mozilla.debian.net/ wheezy-backports iceweasel-release' state=present
+- name: Install Mozilla Debian GPG key package
+  apt: pkg=pkg-mozilla-archive-keyring state=installed update_cache=true
+- name: Install Mozilla GPG key
+  command: gpg --check-sigs --fingerprint --keyring /etc/apt/trusted.gpg.d/pkg-mozilla-archive-keyring.gpg --keyring /usr/share/keyrings/debian-keyring.gpg pkg-mozilla-maintainers
+  ignore_errors: True
+- name: Install Iceweasel
+  apt: pkg=iceweasel state=installed update_cache=true

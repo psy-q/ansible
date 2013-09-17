@@ -1,0 +1,11 @@
+---
+- name: Make sure no chromedriver is in /tmp
+  file: path=/tmp/chromedriver state=absent
+- name: Download chromedriver
+  shell: curl https://chromedriver.googlecode.com/files/chromedriver_linux{{  ansible_userspace_bits  }}_26.0.1383.0.zip > chromedriver.zip chdir=/tmp
+- name: Unzip chromedriver
+  command: unzip chromedriver.zip chdir=/tmp
+- name: Stick chromedriver somewhere in the PATH
+  command: mv chromedriver /usr/local/bin chdir=/tmp
+- name: Change mode of chromedriver to be executable
+  file: path=/usr/local/bin/chromedriver mode=755

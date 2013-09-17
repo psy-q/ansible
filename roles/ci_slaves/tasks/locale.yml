@@ -1,0 +1,10 @@
+---
+- copy: src=locale.sh dest=/etc/profile.d/locale.sh mode=775
+- name: Install locales
+  apt: pkg=locales state=installed
+  environment: "{{ locale_env }}"
+- lineinfile: dest=/etc/locale.gen state=present regexp='^en_GB.UTF-8 UTF_8' line='en_GB.UTF-8 UTF-8'
+- lineinfile: dest=/etc/locale.gen state=absent regexp='^# en_GB.UTF-8 UTF-8'
+- name: Configure locales
+  command: dpkg-reconfigure locales
+  environment: "{{ locale_env }}"
