@@ -31,7 +31,10 @@
 - include: postgresql.yml
 
 - name: Set default Ruby 
-  command: executable=/bin/bash bash -l -c 'rbenv global 1.9.3-p448'
+  command: executable=/bin/bash bash -l -c 'rbenv global {{ default_ruby_version }}'
   when: rbenv_is_installed|success
 
 - include: ragel.yml
+
+- name: Install cleanup cronjob
+  copy: src=jenkins_cleanup dest=/etc/cron.weekly/jenkins_cleanup mode=755

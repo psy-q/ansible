@@ -1,0 +1,8 @@
+#!/bin/bash -l
+JENKINS_HOME='/home/jenkins'
+echo "CLEANING JENKINS STUFF IN ${JENKINS_HOME}"
+mv -f "${JENKINS_HOME}/.ssh/authorized_keys" "${JENKINS_HOME}/.ssh/authorized_keys_tmp"
+pkill  -u jenkins
+rm -rf "${JENKINS_HOME}/"*xvfb
+rm -rf "${JENKINS_HOME}/workspace/"*
+mv -f "${JENKINS_HOME}/.ssh/authorized_keys_tmp" "${JENKINS_HOME}/.ssh/authorized_keys"
