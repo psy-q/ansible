@@ -1,0 +1,4 @@
+---
+- include: locale.yml
+- include: postgresql.yml
+- include: packages.yml

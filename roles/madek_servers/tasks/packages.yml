@@ -1,0 +1,21 @@
+---
+- name: Install Madek packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - libimage-exiftool-perl
+    - imagemagick
+    - wget
+    - ffmpeg
+    - zip
+    - unzip
+    - memcached
+    - git-core
+    - curl
+    - build-essential
+    - g++
+    - libssl-dev
+    - libreadline-dev
+    - libxslt1-dev
+    - libxml2-dev
+    - libpq-dev
+    - zlib1g-dev

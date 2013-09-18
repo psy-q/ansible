@@ -1,0 +1,7 @@
+---
+- name: Install Madek Vagrant virtual host in Apache
+  copy: src=madek_vagrant_virtual_host dest=/etc/apache2/sites-available/madek_vagrant
+- name: Activate leihs virtual host
+  command: a2ensite madek_vagrant
+  notify:
+    - reload apache
