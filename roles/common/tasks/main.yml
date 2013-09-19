@@ -6,3 +6,9 @@
 
 - name: Install requirements for managing repos via Ansible (python-pycurl)
   apt: pkg=python-pycurl state=installed update_cache=true
+
+- name: zip is always something useful
+  apt: pkg=zip state=installed
+
+- name: unzip is always something useful
+  apt: pkg=unzip state=installed

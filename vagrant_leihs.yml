@@ -7,9 +7,9 @@
     - iceweasel_latest
     - chromedriver
     - phantomjs
+    - rails_servers
     - gherkin_lexer_hack
     - remote_display
-    - rails_servers
   tasks:
     - include: tasks/leihs_packages.yml
     - include: tasks/leihs_virtual_host.yml
