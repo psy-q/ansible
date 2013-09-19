@@ -7,3 +7,15 @@
       Options -MultiViews
    </Directory>
 </VirtualHost>
+
+<VirtualHost *:80>
+   ServerName dev.leihs.vagrant
+   DocumentRoot /vagrant/public/
+   RailsEnv development
+
+   <Directory /vagrant/public>
+      AllowOverride all
+      Options -MultiViews
+   </Directory>
+</VirtualHost>
+
