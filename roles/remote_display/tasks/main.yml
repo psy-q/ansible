@@ -1,0 +1,7 @@
+---
+- name: Install VNC server
+  apt: pkg=tightvncserver state=installed update_cache=true
+- name: Install Fluxbox
+  apt: pkg=fluxbox state=installed update_cache=true
+- name: Install xbase-clients
+  apt: pkg=xbase-clients state=installed update_cache=true

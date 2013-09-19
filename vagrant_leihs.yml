@@ -1,10 +1,14 @@
 ---
-- hosts: vagrant
+- hosts: vagrant_leihs
   user: vagrant
   sudo: True
   roles:
-    - ci_slaves
     - mariadb_servers
+    - iceweasel_latest
+    - chromedriver
+    - phantomjs
+    - gherkin_lexer_hack
+    - remote_display
     - rails_servers
   tasks:
     - include: tasks/leihs_packages.yml

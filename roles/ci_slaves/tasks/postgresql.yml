@@ -18,16 +18,16 @@
 
 - name: Create jenkins PostgreSQL user
   postgresql_user: name=jenkins password=jenkins
-  sudo: True
-  sudo_user: postgres
+#  sudo: True
+#  sudo_user: postgres
 
 - name: Enable PostgreSQL Trigram extension
   shell: psql template1 -c 'CREATE EXTENSION pg_trgm;'
   ignore_errors: True
-  sudo: True
-  sudo_user: postgres
+#  sudo: True
+#  sudo_user: postgres
 
 - name: Give jenkins a PostgreSQL database
   postgresql_db: name=jenkins owner=jenkins state=present
-  sudo: True
-  sudo_user: postgres
+#  sudo: True
+#  sudo_user: postgres
