@@ -1,5 +1,5 @@
 ---
-- name: Install leihs virtual host in Apache
+- name: Install Vagrant-style leihs virtual host in Apache
   copy: src=vagrant_leihs_virtual_host dest=/etc/apache2/sites-available/leihs
 - name: Activate leihs virtual host
   command: a2ensite leihs
