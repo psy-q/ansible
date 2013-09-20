@@ -15,6 +15,7 @@ www.psy-q.ch
 www.psy-q.ch
 cislave1.zhdk.ch
 cislave2.zhdk.ch
+localhost
 
 [ci_slaves]
 cislave1.zhdk.ch
@@ -28,3 +29,6 @@ cislave2.zhdk.ch
 
 [vagrant_leihs]
 192.168.10.10
+
+[vagrant_madek]
+192.168.10.12

@@ -6,6 +6,8 @@
 - include: ci_slaves.yml
 - include: rails_servers.yml
 - include: madek_servers.yml
+- include: vagrant_madek.yml
+- include: vagrant_leihs.yml
 - hosts: www.psy-q.ch
   roles:
   - { role: rvm_ruby, ruby_version: 1.9.3-p448 }

@@ -1,5 +1,5 @@
 ---
-- hosts: vagrant_leihs
+- hosts: vagrant_madek
   user: vagrant
   sudo: True
   roles:
@@ -11,7 +11,7 @@
     - gherkin_lexer_hack
     - remote_display
   tasks:
-    - include: tasks/leihs_packages.yml
-    - include: tasks/vagrant_leihs_virtual_host.yml
+    - include: roles/madek_servers/tasks/packages.yml
+    - include: tasks/vagrant_madek_virtual_host.yml
   handlers:
     - include: roles/webservers/handlers/main.yml

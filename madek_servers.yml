@@ -6,6 +6,7 @@
     - include: roles/webservers/handlers/main.yml
 
 
+# This is a Vagrant virtual machine for developers, with very weak security
 - hosts: 192.168.56.102
   tasks:
     - include: roles/madek_servers/tasks/madek_vagrant_virtual_host.yml
