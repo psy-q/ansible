@@ -48,7 +48,6 @@
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{ rbenv_root.stdout }}/plugins/ruby-build
   when: rbenv_is_installed|failed
 
-
 - name: Install rbenv .profile snippet (1/2)
   sudo: True
   sudo_user: "{{ ruby_user }}"
@@ -57,6 +56,7 @@
     state: present
     regexp: "export PATH=.*rbenv.*"
     line: "export PATH=\"{{ rbenv_root.stdout }}/bin:$PATH\""
+    create: yes
   when: rbenv_is_installed|failed
 
 - name: Install rbenv .profile snippet (2/2)
@@ -68,8 +68,8 @@
     regexp: ^eval.*rbenv init.*
     line: eval "$(rbenv init -)"
     insertafter: "^export PATH=.*rbenv.*"
+    create: yes
   when: rbenv_is_installed|failed
-
 
 - name: Check if Ruby {{ ruby_version }} is installed
   sudo: True
@@ -89,7 +89,7 @@
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem list bundler | grep bundler'
-  when: rbenv_is_installed|success and (ruby_is_installed|success or ruby_has_been_installed|success)
+  when: (rbenv_is_installed|success or rbenv_has_been_installed|success) and (ruby_is_installed|success or ruby_has_been_installed|success)
   register: bundler_is_installed
   ignore_errors: True
 
