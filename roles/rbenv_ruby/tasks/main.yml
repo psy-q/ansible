@@ -19,16 +19,24 @@
 - name: Make sure {{ ruby_user }} exists and uses bash
   user: name={{ ruby_user }} shell=/bin/bash state=present
 
+- name: Register rbenv_root
+  sudo: True
+  sudo_user: "{{ ruby_user }}"
+  command: echo "/home/{{ ruby_user }}/.rbenv"
+  register: rbenv_root
+
 - name: Allow {{ ruby_user }} to sudo anything due to the nature of rbenv
   lineinfile: "dest=/etc/sudoers state=present regexp='^{{ ruby_user }}' line='{{ ruby_user }} ALL=(ALL) NOPASSWD: ALL'"
 
 - name: Check if rbenv is installed
-  command: bash -l -c 'rbenv versions'
+  sudo: True
+  sudo_user: "{{ ruby_user }}"
+  command: chdir={{ rbenv_root.stdout }} bash -l -c "RBENV_ROOT={{ rbenv_root.stdout }} rbenv --version"
   register: rbenv_is_installed
   ignore_errors: True
 
 - name: Install rbenv locally for {{ ruby_user }}
-  git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{ rbenv_root.stdout }}
   sudo: True
   sudo_user: "{{ ruby_user }}"
   register: rbenv_has_been_installed
@@ -37,48 +45,50 @@
 - name: Install ruby-build so you can install Rubies through rbenv
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  git: repo=https://github.com/sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest={{ rbenv_root.stdout }}/plugins/ruby-build
   when: rbenv_is_installed|failed
 
-- name: Install rbenv .bashrc snippet (1/2)
+
+- name: Install rbenv .profile snippet (1/2)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   lineinfile:
-    dest: ~/.bashrc
+    dest: ~/.profile
     state: present
     regexp: "export PATH=.*rbenv.*"
-    line: "export PATH=\"$HOME/.rbenv/bin:$PATH\""
+    line: "export PATH=\"{{ rbenv_root.stdout }}/bin:$PATH\""
   when: rbenv_is_installed|failed
 
-- name: Install rbenv .bashrc snippet (2/2)
+- name: Install rbenv .profile snippet (2/2)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   lineinfile:
-    dest: ~/.bashrc
+    dest: ~/.profile
     state: present
     regexp: ^eval.*rbenv init.*
     line: eval "$(rbenv init -)"
     insertafter: "^export PATH=.*rbenv.*"
   when: rbenv_is_installed|failed
 
+
 - name: Check if Ruby {{ ruby_version }} is installed
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  command: bash -l -c 'rbenv versions | grep {{ ruby_version }}'
+  command: chdir={{ rbenv_root.stdout }} bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv versions | grep {{ ruby_version }}'
   register: ruby_is_installed
   ignore_errors: True
 
 - name: Install rbenv Ruby {{ ruby_version }}
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  command: executable=/bin/bash bash -l -c 'rbenv install {{ ruby_version }}'
+  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv install {{ ruby_version }}'
   when: (rbenv_is_installed|success or rbenv_has_been_installed|success) and ruby_is_installed|failed
   register: ruby_has_been_installed
 
 - name: Check if Ruby {{ ruby_version }} has Bundler
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  command: executable=/bin/bash bash -l -c 'rbenv shell {{ ruby_version }} && gem list bundler | grep bundler'
+  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && gem list bundler | grep bundler'
   when: rbenv_is_installed|success and (ruby_is_installed|success or ruby_has_been_installed|success)
   register: bundler_is_installed
   ignore_errors: True
@@ -86,5 +96,5 @@
 - name: Install bundler for Ruby {{ ruby_version }}
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  command: executable=/bin/bash bash -l -c 'rbenv shell {{ ruby_version }} && gem install bundler'
+  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && gem install bundler'
   when: bundler_is_installed|failed
