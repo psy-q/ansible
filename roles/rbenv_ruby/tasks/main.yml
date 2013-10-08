@@ -45,7 +45,8 @@
   sudo_user: "{{ ruby_user }}"
   lineinfile:
     dest: ~/.bashrc
-    regexp: "^export PATH=\"$HOME/\\.rbenv/bin:$PATH\""
+    state: present
+    regexp: "export PATH=.*rbenv.*"
     line: "export PATH=\"$HOME/.rbenv/bin:$PATH\""
   when: rbenv_is_installed|failed
 
@@ -54,10 +55,10 @@
   sudo_user: "{{ ruby_user }}"
   lineinfile:
     dest: ~/.bashrc
-    regexp: ^eval "$(rbenv init -)"
+    state: present
+    regexp: ^eval.*rbenv init.*
     line: eval "$(rbenv init -)"
-    line: "export PATH=\"$HOME/.rbenv/bin:$PATH\""
-    insertafter: "^export PATH=\"$HOME/\\.rbenv/bin:$PATH\""
+    insertafter: "^export PATH=.*rbenv.*"
   when: rbenv_is_installed|failed
 
 - name: Check if Ruby {{ ruby_version }} is installed
