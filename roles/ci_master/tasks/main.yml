@@ -4,9 +4,6 @@
 #- include: ../../../roles/madek_servers/tasks/packages.yml
 - include: locale.yml
 
-- name: Make sure jenkins user is present
-  user: name=jenkins shell=/bin/bash state=present
-
 # Need to improve below by storing those keys somewhere central.
 - name: Install root SSH keys
   authorized_key: user=root key={{ item }} state=present
@@ -25,13 +22,8 @@
     - ../../../files/ssh_keys/sebastian.pub
     - ../../../files/ssh_keys/matus.pub
 
-- include: postgresql.yml
-
 - name: Set default Ruby
   sudo: True
   sudo_user: jenkins
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv global {{ default_ruby_version }}'
   when: rbenv_is_installed|success
-
-- name: Install cleanup cronjob
-  copy: src=jenkins_cleanup dest=/etc/cron.weekly/jenkins_cleanup mode=755
