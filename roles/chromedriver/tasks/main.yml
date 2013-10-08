@@ -1,4 +1,6 @@
 ---
+- name: Install Chromedriver dependencies
+  apt: pkg=curl state=present
 - name: Make sure no chromedriver is in /tmp
   file: path=/tmp/chromedriver state=absent
 - name: Download chromedriver

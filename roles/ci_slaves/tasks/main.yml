@@ -6,7 +6,7 @@
 - include: vim.yml
 - include: ntp.yml
 
-- name: Create jenkins user
+- name: Make sure jenkins user is present
   user: name=jenkins shell=/bin/bash state=present
 
 # Need to improve below by storing those keys somewhere central.
@@ -29,7 +29,9 @@
 
 - include: postgresql.yml
 
-- name: Set default Ruby 
+- name: Set default Ruby
+  sudo: True
+  sudo_user: jenkins
   command: executable=/bin/bash bash -l -c '{{set_default_ruby_command}} {{ default_ruby_version }}'
   when: rbenv_is_installed|success
 
