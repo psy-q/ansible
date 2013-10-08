@@ -8,7 +8,7 @@
     - chromedriver
     - phantomjs
     - rails_servers
-    - gherkin_lexer_hack
+    - rvm_gherkin_lexer_hack
     - remote_display
   tasks:
     - include: tasks/leihs_packages.yml

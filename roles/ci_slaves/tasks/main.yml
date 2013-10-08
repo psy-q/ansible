@@ -32,7 +32,7 @@
 - name: Set default Ruby
   sudo: True
   sudo_user: jenkins
-  command: executable=/bin/bash bash -l -c '{{set_default_ruby_command}} {{ default_ruby_version }}'
+  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv global {{ default_ruby_version }}'
   when: rbenv_is_installed|success
 
 - name: Install cleanup cronjob

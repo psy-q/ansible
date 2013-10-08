@@ -1,7 +1,7 @@
 ---
-ruby_version: ruby-1.9.3-p448
+ruby_version: 1.9.3-p448
 ruby_user: root
-default_ruby_version: ruby-1.9.3-p448
+default_ruby_version: 1.9.3-p448
 choose_ruby_command: rbenv shell
 install_ruby_command: rbenv install
 set_default_ruby_command: rbenv global

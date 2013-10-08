@@ -9,3 +9,5 @@
   apt: pkg=chromium state=installed
 - name: Install Curl
   apt: pkg=curl state=installed
+- name: Install sudo
+  apt: pkg=sudo state=installed
