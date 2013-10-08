@@ -1,6 +1,7 @@
 ---
 dependencies:
   - { role: common }
+  - { role: ntp_client }
   - { role: remote_display }
   - { role: chromedriver }
   - { role: phantomjs }
@@ -8,3 +9,4 @@ dependencies:
   - { role: rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins }
   - { role: rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: jenkins }
   - { role: rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448}
+  - { role: domina_ci_executor, dest: /home/domina/domina_ci_executor, user: domina }
