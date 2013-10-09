@@ -9,7 +9,7 @@
 - include: madek_servers.yml
 - include: vagrant_madek.yml
 - include: vagrant_leihs.yml
-
+- include: www.lincomp.ch.yml
 
 - hosts: www.psy-q.ch
   roles:

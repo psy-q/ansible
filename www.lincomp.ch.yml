@@ -1,0 +1,9 @@
+---
+- hosts: www.lincomp.ch
+  roles:
+    - common
+    # - mariadb_servers
+  tasks:
+    - include: tasks/www.lincomp.ch.yml
+  handlers:
+    - include: roles/webservers/handlers/main.yml

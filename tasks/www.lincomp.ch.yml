@@ -1,0 +1,7 @@
+---
+- name: Packages required for Stizun
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - ruby1.9.3
+    - apache2
+    - apache2-prefork-dev
