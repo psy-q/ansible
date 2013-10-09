@@ -2,5 +2,8 @@
 dependencies:
   - { role: common }
   - { role: ntp_client }
+  - { role: iceweasel_latest }
+  - { role: phantomjs }
+  - { role: chromedriver }
   - { role: rbenv_ruby, ruby_version: jruby-1.7.4, ruby_user: jenkins }
   - { role: rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins }
