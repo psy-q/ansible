@@ -22,7 +22,8 @@
 - name: Register rbenv_root
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  command: echo "/home/{{ ruby_user }}/.rbenv"
+  #shell: echo {{ ansible_env.HOME }}/.rbenv
+  shell: echo $HOME/.rbenv
   register: rbenv_root
 
 - name: Allow {{ ruby_user }} to sudo anything due to the nature of rbenv

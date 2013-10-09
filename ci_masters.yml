@@ -1,0 +1,4 @@
+---
+- hosts: ci_masters
+  roles:
+    - ci_master

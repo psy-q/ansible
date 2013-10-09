@@ -22,6 +22,9 @@ cislave1.zhdk.ch
 cislave2.zhdk.ch
 192.168.56.101
 
+[ci_masters]
+ci.zhdk.ch
+
 [vagrant_leihs]
 192.168.10.10
 
