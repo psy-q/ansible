@@ -16,6 +16,7 @@ www.psy-q.ch
 [madek_servers]
 rails.zhdk.ch
 arch.ethz.madek.zhdk.ch
+192.168.56.101
 
 [mariadb_servers]
 www.psy-q.ch
@@ -26,7 +27,6 @@ localhost
 [ci_slaves]
 cislave1.zhdk.ch
 cislave2.zhdk.ch
-192.168.56.101
 
 [ci_masters]
 ci.zhdk.ch
