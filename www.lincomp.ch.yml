@@ -6,4 +6,4 @@
   tasks:
     - include: tasks/www.lincomp.ch.yml
   handlers:
-    - include: roles/webservers/handlers/main.yml
+    - include: roles/servers/web/handlers/main.yml

@@ -1,4 +1,4 @@
 ---
 - hosts: mariadb_servers
   roles:
-    - mariadb_servers
+    - servers/mariadb

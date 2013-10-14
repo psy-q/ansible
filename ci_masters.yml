@@ -1,4 +1,4 @@
 ---
 - hosts: ci_masters
   roles:
-    - ci_master
+    - servers/ci_master

@@ -3,15 +3,15 @@
   user: vagrant
   sudo: True
   roles:
-    - mariadb_servers
+    - servers/mariadb
     - iceweasel_latest
     - chromedriver
     - phantomjs
-    - rails_servers
+    - servers/rails
     - rvm_gherkin_lexer_hack
     - remote_display
   tasks:
     - include: tasks/leihs_packages.yml
     - include: tasks/vagrant_leihs_virtual_host.yml
   handlers:
-    - include: roles/webservers/handlers/main.yml
+    - include: roles/servers/web/handlers/main.yml

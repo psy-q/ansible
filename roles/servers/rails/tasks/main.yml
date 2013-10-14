@@ -33,11 +33,12 @@
   command: bash -lc 'gem install passenger'
 
 - name: build mod_passenger for apache
-  command: bash -lc 'passenger-config --compiled'
-  register: result
+  command: bash -lc 'which passenger-install-apache2-module'
+  register: passenger_is_installed
   ignore_errors: True
+
 - command: bash -lc 'passenger-install-apache2-module -a'
-  when: result|failed
+  when: passenger_is_installed|failed
 
 - name: configure apache for mod_passenger (get snippet)
   command: bash -lc 'passenger-install-apache2-module --snippet > /tmp/passenger.load'

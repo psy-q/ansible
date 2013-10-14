@@ -1,9 +1,9 @@
 ---
 - hosts: ci_slaves
   roles:
-    - ci_slaves
+    - servers/ci_slaves
 
 # The CI slaves need packages and stuff from Madek as well as leihs
   tasks:
-    - include: roles/madek_servers/tasks/packages.yml
+    - include: roles/servers/madek/tasks/packages.yml
     - include: tasks/leihs_packages.yml
