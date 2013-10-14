@@ -13,6 +13,10 @@ www.psy-q.ch
 [wordpress_servers]
 www.psy-q.ch
 
+[madek_servers]
+rails.zhdk.ch
+arch.ethz.madek.zhdk.ch
+
 [mariadb_servers]
 www.psy-q.ch
 cislave1.zhdk.ch
