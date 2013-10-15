@@ -4,18 +4,3 @@
     - servers/madek
   handlers:
     - include: roles/servers/web/handlers/main.yml
-
-
-# This is a virtual machine for developers, with very weak security
-- hosts: 192.168.56.102
-  tasks:
-    - name: Give madek a PostgreSQL user
-      sudo_user: postgres
-      sudo: True
-      postgresql_user: name=madek password=madek state=present
-    - name: Give madek a PostgreSQL database
-      sudo_user: postgres
-      sudo: True
-      postgresql_db: name=madek owner=madek state=present
-  handlers:
-    - include: roles/servers/web/handlers/main.yml
