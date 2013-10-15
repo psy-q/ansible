@@ -25,8 +25,6 @@
     - ../../../files/ssh_keys/sebastian.pub
     - ../../../files/ssh_keys/matus.pub
 
-- include: postgresql.yml
-
 - name: Set default Ruby
   sudo: True
   sudo_user: jenkins

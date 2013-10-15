@@ -1,3 +1,2 @@
 ---
-- include: postgresql.yml
 - include: packages.yml

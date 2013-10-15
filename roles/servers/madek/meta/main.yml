@@ -2,3 +2,4 @@
 dependencies:
   - { role: configuration/utf8_locale }
   - { role: servers/rails }
+  - { role: servers/postgresql, enable_trigram: true }
