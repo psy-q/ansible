@@ -14,8 +14,8 @@
 # Trigram extension
 - name: Install postgresql-contrib because the Trigram extension is needed
   apt: pkg=postgresql-contrib state=present
-  when: enable_trigram|true
+  when: enable_trigram
 - name: Enable PostgreSQL Trigram extension
   shell: psql template1 -c 'CREATE EXTENSION pg_trgm;'
   ignore_errors: True
-  when: enable_trigram|true
+  when: enable_trigram
