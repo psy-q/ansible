@@ -1,4 +1,7 @@
 ---
-- hosts: ci_masters
+- hosts: jenkins_masters
   roles:
-    - servers/ci_master
+    - servers/jenkins_master
+- hosts: domina_masters
+#  roles:
+#    - servers/domina_master

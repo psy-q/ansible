@@ -22,19 +22,23 @@ arch.ethz.madek.zhdk.ch
 www.psy-q.ch
 cislave1.zhdk.ch
 cislave2.zhdk.ch
-localhost
+
+
+# Continuous Integration (CI)
+[jenkins_masters]
+ci.zhdk.ch
+
+[domina_masters]
+ci2.zhdk.ch
 
 [ci_slaves]
 cislave1.zhdk.ch
 cislave2.zhdk.ch
 
-[ci_masters]
-ci.zhdk.ch
 
+# Vagrant virtual machines
 [vagrant_leihs]
 192.168.10.10
 
 [vagrant_madek]
 192.168.10.12
-
-
