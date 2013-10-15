@@ -5,5 +5,3 @@
     # - mariadb_servers
   tasks:
     - include: tasks/www.lincomp.ch.yml
-  handlers:
-    - include: roles/servers/web/handlers/main.yml

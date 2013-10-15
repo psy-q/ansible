@@ -2,5 +2,3 @@
 - hosts: madek_servers
   roles:
     - servers/madek
-  handlers:
-    - include: roles/servers/web/handlers/main.yml

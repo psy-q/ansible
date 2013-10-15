@@ -7,15 +7,21 @@
     - libpq-dev
     - python-psycopg2
   notify: restart postgresql
+  environment: "{{ locale_env }}"
+
 - name: Give the root user a PostgreSQL superuser so the rest of these steps work
   command: su postgres -c 'createuser -rsd root'
   ignore_errors: True
+  environment: "{{ locale_env }}"
 
 # Trigram extension
 - name: Install postgresql-contrib because the Trigram extension is needed
   apt: pkg=postgresql-contrib state=present
   when: enable_trigram
+  environment: "{{ locale_env }}"
+
 - name: Enable PostgreSQL Trigram extension
   shell: psql template1 -c 'CREATE EXTENSION pg_trgm;'
   ignore_errors: True
   when: enable_trigram
+  environment: "{{ locale_env }}"

@@ -4,8 +4,20 @@
   sudo_user: postgres
   sudo: True
   postgresql_user: name=madek password=madek state=present
-- name: Give madek a PostgreSQL database
+
+- name: Give madek a PostgreSQL database madek_dev
   sudo_user: postgres
   sudo: True
-  postgresql_db: name=madek owner=madek state=present
+  postgresql_db: name=madek_dev owner=madek state=present
+
+- name: Give madek a PostgreSQL database madek_test
+  sudo_user: postgres
+  sudo: True
+  postgresql_db: name=madek_test owner=madek state=present
+
+- name: Give madek a PostgreSQL database madek_personas_test
+  sudo_user: postgres
+  sudo: True
+  postgresql_db: name=madek_personas_test owner=madek state=present
+
 - include: developer_vm_madek_virtual_host.yml

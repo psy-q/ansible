@@ -8,5 +8,3 @@
     - phantomjs
     - servers/rails
     - rvm_gherkin_lexer_hack
-  handlers:
-    - include: roles/servers/web/handlers/main.yml
