@@ -1,3 +1,5 @@
+- name: Make sure developer user exists
+  user: name=developer shell=/bin/bash state=present
 - name: Install sudo
   apt: pkg=sudo state=present
 - name: Allow 'developer' user to sudo anything on their VMs
