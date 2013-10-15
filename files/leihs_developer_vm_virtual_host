@@ -1,19 +1,19 @@
 <VirtualHost *:80>
-   ServerName leihs.vagrant
-   DocumentRoot /vagrant/public/
+   ServerName leihs.vm
+   DocumentRoot /home/leihs/source/public/
 
-   <Directory /vagrant/public>
+   <Directory /home/leihs/source/public>
       AllowOverride all
       Options -MultiViews
    </Directory>
 </VirtualHost>
 
 <VirtualHost *:80>
-   ServerName dev.leihs.vagrant
-   DocumentRoot /vagrant/public/
+   ServerName dev.leihs.vm
+   DocumentRoot /home/leihs/source/public/
    RailsEnv development
 
-   <Directory /vagrant/public>
+   <Directory /home/leihs/source/public>
       AllowOverride all
       Options -MultiViews
    </Directory>

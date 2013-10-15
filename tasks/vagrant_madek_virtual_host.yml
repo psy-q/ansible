@@ -1,7 +1,0 @@
----
-- name: Install Vagrant-style Madek virtual host in Apache
-  copy: src=vagrant_madek_virtual_host dest=/etc/apache2/sites-available/madek
-- name: Activate Madek virtual host
-  command: a2ensite madek
-  notify:
-    - reload apache

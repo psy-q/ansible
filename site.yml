@@ -1,4 +1,5 @@
 ---
+- include: authentication.yml
 - include: webservers.yml
 - include: wordpress_servers.yml
 - include: owncloud_servers.yml
@@ -7,9 +8,9 @@
 - include: ci_slaves.yml
 - include: rails_servers.yml
 - include: madek_servers.yml
-- include: vagrant_madek.yml
-- include: vagrant_leihs.yml
 - include: www.lincomp.ch.yml
+- include: developer_vm_madek.yml
+- include: developer_vm_leihs.yml
 
 - hosts: www.psy-q.ch
   roles:

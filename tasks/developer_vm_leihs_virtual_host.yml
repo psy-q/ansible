@@ -1,0 +1,7 @@
+---
+- name: Install leihs virtual host aimed at developer VMs in Apache
+  copy: src=developer_vm_leihs_virtual_host dest=/etc/apache2/sites-available/leihs
+- name: Activate leihs virtual host
+  command: a2ensite leihs
+  notify:
+    - reload apache

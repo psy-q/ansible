@@ -36,9 +36,12 @@ cislave1.zhdk.ch
 cislave2.zhdk.ch
 
 
-# Vagrant virtual machines
-[vagrant_leihs]
-192.168.10.10
+# Developer virtual machines
+[developer_vms]
+192.168.56.102
 
-[vagrant_madek]
-192.168.10.12
+[developer_vm_leihs]
+#192.168.56.102
+
+[developer_vm_madek]
+192.168.56.102

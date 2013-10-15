@@ -9,7 +9,7 @@
 # This is a virtual machine for developers, with very weak security
 - hosts: 192.168.56.102
   tasks:
-    - include: roles/servers/madek/tasks/madek_vagrant_virtual_host.yml
+    - include: roles/servers/madek/tasks/developer_vm_madek_virtual_host.yml
     - name: Give madek a PostgreSQL user
       sudo_user: postgres
       sudo: True

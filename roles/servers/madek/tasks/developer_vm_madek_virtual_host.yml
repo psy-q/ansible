@@ -1,0 +1,7 @@
+---
+- name: Install Madek developer VM virtual host in Apache
+  copy: src=developer_vm_madek_virtual_host dest=/etc/apache2/sites-available/madek_vm
+- name: Activate leihs virtual host
+  command: a2ensite madek_vm
+  notify:
+    - reload apache

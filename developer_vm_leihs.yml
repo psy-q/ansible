@@ -1,6 +1,6 @@
 ---
-- hosts: vagrant_madek
-  user: vagrant
+- hosts: developer_vm_leihs
+  user: developer
   sudo: True
   roles:
     - servers/mariadb
@@ -11,7 +11,7 @@
     - rvm_gherkin_lexer_hack
     - remote_display
   tasks:
-    - include: roles/servers/madek/tasks/packages.yml
-    - include: tasks/vagrant_madek_virtual_host.yml
+    - include: tasks/leihs_packages.yml
+    - include: tasks/developer_vm_leihs_virtual_host.yml
   handlers:
     - include: roles/servers/web/handlers/main.yml

@@ -1,19 +1,19 @@
 <VirtualHost *:80>
-   ServerName madek.vagrant
-   DocumentRoot /vagrant/public/
+   ServerName madek.vm
+   DocumentRoot /home/madek/source/public/
 
-   <Directory /vagrant/public>
+   <Directory /home/madek/source/public>
       AllowOverride all
       Options -MultiViews
    </Directory>
 </VirtualHost>
 
 <VirtualHost *:80>
-   ServerName dev.madek.vagrant
-   DocumentRoot /vagrant/public/
+   ServerName dev.madek.vm
+   DocumentRoot /home/madek/source/public/
    RailsEnv development
 
-   <Directory /vagrant/public>
+   <Directory /home/madek/source/public>
       AllowOverride all
       Options -MultiViews
    </Directory>
