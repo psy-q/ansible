@@ -3,7 +3,7 @@
 - name: Give madek a PostgreSQL user
   sudo_user: postgres
   sudo: True
-  postgresql_user: name=madek password=madek state=present
+  postgresql_user: name=madek password=madek role_attr_flags="CREATEDB" state=present
 
 - name: Give madek a PostgreSQL database madek_dev
   sudo_user: postgres
