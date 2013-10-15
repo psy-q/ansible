@@ -7,3 +7,15 @@
       Options -MultiViews
    </Directory>
 </VirtualHost>
+
+<VirtualHost *:80>
+   ServerName dev.madek.vm
+   DocumentRoot /home/developer/madek/public/
+   RailsEnv development
+
+   <Directory /home/developer/madek/public>
+      AllowOverride all
+      Options -MultiViews
+   </Directory>
+</VirtualHost>
+
