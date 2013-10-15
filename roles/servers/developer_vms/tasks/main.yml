@@ -1,0 +1,4 @@
+- name: Install sudo
+  apt: pkg=sudo state=present
+- name: Allow 'developer' user to sudo anything on their VMs
+  lineinfile: "dest=/etc/sudoers state=present regexp='^developer' line='developer ALL=(ALL) NOPASSWD: ALL'"

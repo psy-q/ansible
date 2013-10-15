@@ -1,0 +1,11 @@
+  # Very weak security is OK for this developer VM
+- include: ../../../servers/madek/tasks/packages.yml
+- name: Give madek a PostgreSQL user
+  sudo_user: postgres
+  sudo: True
+  postgresql_user: name=madek password=madek state=present
+- name: Give madek a PostgreSQL database
+  sudo_user: postgres
+  sudo: True
+  postgresql_db: name=madek owner=madek state=present
+- include: ../../../servers/madek/tasks/developer_vm_madek_virtual_host.yml

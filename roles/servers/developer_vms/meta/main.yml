@@ -1,4 +1,5 @@
 ---
 dependencies:
+  - { role: common }
   - { role: configuration/utf8_locale }
-  - { role: servers/rails }
+  - { role: remote_display }

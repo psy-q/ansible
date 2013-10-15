@@ -3,15 +3,12 @@
   user: developer
   sudo: True
   roles:
+    - servers/developer_vm_madek
     - servers/mariadb
     - iceweasel_latest
     - chromedriver
     - phantomjs
     - servers/rails
     - rvm_gherkin_lexer_hack
-    - remote_display
-  tasks:
-    - include: roles/servers/madek/tasks/packages.yml
-    - include: tasks/developer_vm_madek_virtual_host.yml
   handlers:
     - include: roles/servers/web/handlers/main.yml

@@ -2,13 +2,6 @@
 # this file and not in any of the roles. Otherwise the roles become
 # less reusable.
 ---
-- hosts: developer_vms
-  tasks:
-  - name: Install sudo
-    apt: pkg=sudo state=present
-  - name: Allow 'developer' user to sudo anything on their VMs
-    lineinfile: "dest=/etc/sudoers state=present regexp='^developer' line='developer ALL=(ALL) NOPASSWD: ALL'"
-
 - hosts: ci2.zhdk.ch
   tasks:
   - name: Authorize root users for ci2.zhdk.ch

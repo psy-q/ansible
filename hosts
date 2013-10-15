@@ -37,9 +37,6 @@ cislave2.zhdk.ch
 
 
 # Developer virtual machines
-[developer_vms]
-192.168.56.102
-
 [developer_vm_leihs]
 #192.168.56.102
 

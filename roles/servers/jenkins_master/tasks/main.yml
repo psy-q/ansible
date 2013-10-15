@@ -1,6 +1,5 @@
 ---
 - include: packages.yml
-- include: locale.yml
 
 # Need to improve below by storing those keys somewhere central.
 - name: Install root SSH keys

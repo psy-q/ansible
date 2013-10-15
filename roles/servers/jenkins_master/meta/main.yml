@@ -1,6 +1,7 @@
 ---
 dependencies:
   - { role: common }
+  - { role: configuration/utf8_locale }
   - { role: ntp_client }
   - { role: iceweasel_latest }
   - { role: phantomjs }

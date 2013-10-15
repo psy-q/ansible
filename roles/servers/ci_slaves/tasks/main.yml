@@ -2,7 +2,6 @@
 - include: packages.yml
 # this is handled by a meta dependency on that role
 #- include: ../../../roles/madek_servers/tasks/packages.yml
-- include: locale.yml
 - include: vim.yml
 
 - name: Make sure jenkins user is present

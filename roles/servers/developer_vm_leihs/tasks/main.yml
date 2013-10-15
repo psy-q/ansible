@@ -1,0 +1,3 @@
+---
+- include: ../../../../tasks/leihs_packages.yml
+- include: ../../../../tasks/developer_vm_leihs_virtual_host.yml

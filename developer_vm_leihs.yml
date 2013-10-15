@@ -3,15 +3,12 @@
   user: developer
   sudo: True
   roles:
+    - servers/developer_vm_leihs
     - servers/mariadb
     - iceweasel_latest
     - chromedriver
     - phantomjs
     - servers/rails
     - rvm_gherkin_lexer_hack
-    - remote_display
-  tasks:
-    - include: tasks/leihs_packages.yml
-    - include: tasks/developer_vm_leihs_virtual_host.yml
   handlers:
     - include: roles/servers/web/handlers/main.yml
