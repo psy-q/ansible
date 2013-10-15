@@ -29,11 +29,18 @@
   command: bash -lc 'rvm current'
   register: ruby_version
 
+
 - name: Install passenger gem
-  command: bash -lc 'gem install passenger'
+  command: bash -lc 'gem list passenger -v 4.0.20 --installed'
+  register: passenger_gem_is_installed
+
+# Always explicitly install the version that we've tested
+- name: Install passenger gem
+  command: bash -lc 'gem install passenger -v 4.0.20'
+  when: passenger_gem_is_installed|failed
 
 - name: Check (messily) if mod_passenger has compiled
-  command: bash -lc 'ls -l `passenger-install-apache2-module --snippet | grep passenger_module | cut -f 3 -d " "`'
+  command: bash -lc 'ls `passenger-install-apache2-module --snippet | grep passenger_module | cut -f 3 -d " "`'
   register: passenger_is_installed
   ignore_errors: True
 
@@ -44,11 +51,11 @@
 
 - name: configure apache for mod_passenger (get snippet)
   command: bash -lc 'passenger-install-apache2-module --snippet > /tmp/passenger.load'
-  when: passenger_has_been_installed|success
+  when: passenger_has_been_installed|success or passenger_is_installed|success
 
 - name: configure apache for mod_passenger (copy snippet)
   command: cp /tmp/passenger.load /etc/apache2/mods-available/passenger.load
-  when: passenger_has_been_installed|success
+  when: passenger_has_been_installed|success or passenger_is_installed|success
 
 - name: Enable Passenger module
   command: a2enmod passenger
