@@ -8,4 +8,4 @@
   sudo_user: postgres
   sudo: True
   postgresql_db: name=madek owner=madek state=present
-- include: ../../../servers/madek/tasks/developer_vm_madek_virtual_host.yml
+- include: developer_vm_madek_virtual_host.yml

@@ -1,7 +1,5 @@
 ---
 - hosts: developer_vm_madek
-  user: developer
-  sudo: True
   roles:
     - servers/developer_vm_madek
     - servers/mariadb

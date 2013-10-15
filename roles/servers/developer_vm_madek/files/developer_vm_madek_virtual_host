@@ -1,8 +1,8 @@
 <VirtualHost *:80>
    ServerName madek.vm
-   DocumentRoot /home/madek/source/public/
+   DocumentRoot /home/developer/madek/public/
 
-   <Directory /home/madek/source/public>
+   <Directory /home/developer/madek/public>
       AllowOverride all
       Options -MultiViews
    </Directory>

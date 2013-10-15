@@ -1,7 +1,5 @@
 ---
 - hosts: developer_vm_leihs
-  user: developer
-  sudo: True
   roles:
     - servers/developer_vm_leihs
     - servers/mariadb
