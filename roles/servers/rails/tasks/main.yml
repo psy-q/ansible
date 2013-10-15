@@ -33,6 +33,7 @@
 - name: Install passenger gem
   command: bash -lc 'gem list passenger -v 4.0.20 --installed'
   register: passenger_gem_is_installed
+  ignore_errors: True
 
 # Always explicitly install the version that we've tested
 - name: Install passenger gem
