@@ -2,6 +2,7 @@
 - hosts: jenkins_masters
   roles:
     - servers/jenkins_master
+
 - hosts: domina_masters
-#  roles:
-#    - servers/domina_master
+  roles:
+    - servers/domina_master

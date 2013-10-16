@@ -1,0 +1,8 @@
+---
+- name: Install Debuntu dependencies
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - curl
+
+- name: Install debuntu functions into profile.d
+  template: src=debuntu_fun.sh.j2 dest=/etc/profile.d/debuntu_fun.sh mode=755

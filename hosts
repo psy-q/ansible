@@ -1,3 +1,4 @@
+# Single servers that aren't really grouped
 www.lincomp.ch
 
 [psy-q]
@@ -30,10 +31,12 @@ ci.zhdk.ch
 
 [domina_masters]
 ci2.zhdk.ch
+192.168.56.102
 
 [ci_slaves]
 cislave1.zhdk.ch
 cislave2.zhdk.ch
+
 
 
 # Developer virtual machines
@@ -42,7 +45,5 @@ developer_vm_leihs
 developer_vm_madek
 
 [developer_vm_leihs]
-#192.168.56.102
 
 [developer_vm_madek]
-192.168.56.102

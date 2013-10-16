@@ -7,8 +7,7 @@
 - name: Make sure {{ user }} exists
   user: name={{ user }} shell=/bin/bash state=present
 
-- name: Clone the Domina CI Executor repository
+- name: Install Domina CI Executor using debuntu
   sudo: True
-  sudo_user: domina
-  git: repo=https://github.com/DrTom/domina-ci-executor.git update=yes dest={{ dest }}
-
+  sudo_user: "{{ user }}"
+  command: bash -l -c 'debuntu_ci_domina-ci-executor_install'
