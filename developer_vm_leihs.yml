@@ -4,7 +4,7 @@
     - servers/developer_vm_leihs
     - servers/mariadb
     - iceweasel_latest
-    - chromedriver
-    - phantomjs
+    - binaries/chromedriver
+    - binaries/phantomjs
     - servers/rails
-    - rvm_gherkin_lexer_hack
+    - ruby/rvm_gherkin_lexer_hack

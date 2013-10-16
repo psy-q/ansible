@@ -5,10 +5,10 @@ dependencies:
   - { role: servers/postgresql, enable_trigram: true }
   - { role: ntp_client }
   - { role: remote_display }
-  - { role: chromedriver }
-  - { role: phantomjs }
+  - { role: binaries/chromedriver }
+  - { role: binaries/phantomjs }
   - { role: iceweasel_latest }
-  - { role: rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins }
-  - { role: rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: jenkins }
-  - { role: rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448}
-  - { role: domina_ci_executor, dest: /home/domina/domina_ci_executor, user: domina }
+  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins }
+  - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: jenkins }
+  - { role: ruby/rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448}
+  - { role: servers/domina_ci_executor, dest: /home/domina/domina_ci_executor, user: domina }

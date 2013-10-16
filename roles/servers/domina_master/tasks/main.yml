@@ -1,9 +1,11 @@
 ---
+- name: Enable wheezy-backports
+  apt_repository: repo='deb http://ftp.ch.debian.org/debian/ wheezy-backports main' state=present
+
 - name: Install Domina CI Master dependencies
   apt: pkg={{ item }} state=installed
   with_items:
-    # visualvm is not available on Debian Wheezy, only on testing
-    #    - visualvm
+    - openjdk-7-jre
 
 - name: Install Torquebox via debuntu
   command: bash -l -c 'debuntu_torquebox_install_3.0.0'

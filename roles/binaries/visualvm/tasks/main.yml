@@ -1,0 +1,17 @@
+---
+- name: Install VisualVM dependencies
+  apt: pkg={{ item }} state=present
+  with_items:
+    - openjdk-7-jre
+
+- name: Make sure no VisualVM zipball is in /tmp
+  file: path=/tmp/visualvm.zip state=absent
+
+- name: Download VisualVM release {{ release }}
+  shell: curl -L https://java.net/projects/visualvm/downloads/download/release{{ release }}/visualvm_{{ release }}.zip -o visualvm.zip chdir=/tmp
+
+- name: Unpack VisualVM release {{ release }} to /usr/local/visualvm
+  command: unzip -o /tmp/visualvm.zip -d /usr/local
+
+- name: Symlink VisualVM release {{ release }} into global PATH
+  file: state=link src=/usr/local/visualvm_{{ release}}/bin/visualvm dest=/usr/local/bin/visualvm
