@@ -9,13 +9,20 @@
     with_file:
       - files/ssh_keys/rca.pub
       - files/ssh_keys/thomas.pub
+      - files/ssh_keys/franco.pub
+      - files/ssh_keys/sebastian.pub
+      - files/ssh_keys/matus.pub
 
 - hosts: ci.zhdk.ch
   tasks:
-  - name: Root users for ci.zhdk.ch
+  - name: Authorize root users for ci.zhdk.ch
     authorized_key: user=root key={{ item }} state=present
     with_file:
       - files/ssh_keys/rca.pub
+      - files/ssh_keys/thomas.pub
+      - files/ssh_keys/franco.pub
+      - files/ssh_keys/sebastian.pub
+      - files/ssh_keys/matus.pub
 
 - hosts: developer_vms
   tasks:
