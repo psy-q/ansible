@@ -1,9 +1,17 @@
+# From the hosts file:
+#192.168.56.102	ci2.zhdk.ch.vm
+#192.168.56.103	rails.zhdk.ch.vm
+#192.168.56.104	ci.zhdk.ch.vm
+#192.168.56.105	madek.vm
+#192.168.56.106	leihs.vm
+
+
 [webservers]
 rails.zhdk.ch.vm
 
 [madek_servers]
 rails.zhdk.ch.vm
-arch.ethz.madek.zhdk.ch.vm
+#arch.ethz.madek.zhdk.ch.vm
 
 [mariadb_servers]
 cislave1.zhdk.ch.vm
@@ -29,5 +37,7 @@ developer_vm_leihs
 developer_vm_madek
 
 [developer_vm_leihs]
+madek.vm
 
 [developer_vm_madek]
+leihs.vm
