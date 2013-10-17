@@ -1,4 +1,6 @@
 ---
+- name: Install PhantomJS dependencies 
+  apt: pkg=curl state=installed
 - name: Download PhantomJS
   shell: curl https://phantomjs.googlecode.com/files/phantomjs-1.9.0-linux-{{ ansible_machine }}.tar.bz2 | tar xj chdir=/tmp
 - name: Stick PhantomJS somewhere in the PATH
