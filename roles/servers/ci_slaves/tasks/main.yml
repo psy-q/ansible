@@ -7,24 +7,6 @@
 - name: Make sure jenkins user is present
   user: name=jenkins shell=/bin/bash state=present
 
-# Need to improve below by storing those keys somewhere central.
-- name: Install root SSH keys
-  authorized_key: user=root key={{ item }} state=present
-  with_file:
-    - ../../../files/ssh_keys/rca.pub
-    - ../../../files/ssh_keys/thomas.pub
-    - ../../../files/ssh_keys/franco.pub
-    - ../../../files/ssh_keys/sebastian.pub
-
-- name: Install jenkins SSH keys
-  authorized_key: user=jenkins key={{ item }} state=present
-  with_file:
-    - ../../../files/ssh_keys/rca.pub
-    - ../../../files/ssh_keys/thomas.pub
-    - ../../../files/ssh_keys/franco.pub
-    - ../../../files/ssh_keys/sebastian.pub
-    - ../../../files/ssh_keys/matus.pub
-
 - name: Set default Ruby
   sudo: True
   sudo_user: jenkins

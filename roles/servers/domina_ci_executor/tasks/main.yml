@@ -7,7 +7,13 @@
 - name: Make sure {{ user }} exists
   user: name={{ user }} shell=/bin/bash state=present
 
+- name: Register rbenv_root
+  sudo: True
+  sudo_user: "{{ user }}"
+  shell: echo $HOME/.rbenv
+  register: rbenv_root
+
 - name: Install Domina CI Executor using debuntu
   sudo: True
   sudo_user: "{{ user }}"
-  command: bash -l -c 'debuntu_ci_domina-ci-executor_install'
+  command: chdir={{rbenv_root.stdout}} bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} debuntu_ci_domina-ci-executor_install'
