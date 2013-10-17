@@ -99,3 +99,9 @@
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem install bundler'
   when: bundler_is_installed|failed
+
+- name: Set default ruby for {{ ruby_user }} to {{ ruby_version }}
+  sudo: True
+  sudo_user: "{{ ruby_user }}"
+  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv global {{ ruby_version }}'
+  when: set_default

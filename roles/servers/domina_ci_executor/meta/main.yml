@@ -8,7 +8,7 @@ dependencies:
   - { role: binaries/chromedriver }
   - { role: binaries/phantomjs }
   - { role: iceweasel_latest }
-  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: domina }
+  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: domina, set_default: true }
   - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: domina }
   - { role: ruby/rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448, ruby_user: domina }
   - { role: binaries/debuntu }

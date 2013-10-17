@@ -28,3 +28,7 @@
 - name: Install bundler for Ruby {{ ruby_version }}
   command: executable=/bin/bash bash -l -c 'rvm use {{ ruby_version }} && gem install bundler'
   when: bundler_is_installed|failed
+
+- name: Set default ruby to {{ ruby_version }}
+  command: executable=/bin/bash bash -l -c 'rvm alias create default {{ ruby_version }}'
+  when: set_default

@@ -1,7 +1,0 @@
-# This isn't used right now, but it would be sexy if we could tie this
-# in with the role dependencies somehow.
----
-ruby_versions:
-  - 1.9.3-p448
-  - jruby-1.7.2
-default_ruby_version: 1.9.3-p448

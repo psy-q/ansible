@@ -7,4 +7,4 @@
     - binaries/chromedriver
     - binaries/phantomjs
     - servers/rails
-    - ruby/rvm_gherkin_lexer_hack
+    - { role: ruby/rvm_gherkin_lexer_hack, ruby_version: 1.9.3-p448 }

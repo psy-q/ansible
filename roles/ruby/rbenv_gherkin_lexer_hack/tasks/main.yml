@@ -18,4 +18,4 @@
 - name: Recompile gherkin lexer
   sudo: True
   sudo_user: "{{ ruby_user }}"
-  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ default_ruby_version }} && rbenv rehash && cd $(dirname `gem which gherkin`)/.. && bundle install && bundle exec rake compile:gherkin_lexer_en compile:gherkin_lexer_de'
+  command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && cd $(dirname `gem which gherkin`)/.. && bundle install && bundle exec rake compile:gherkin_lexer_en compile:gherkin_lexer_de'
