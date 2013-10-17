@@ -1,6 +1,15 @@
 ---
+- name: Ensure torquebox user is present
+  user: name=torquebox shell=/bin/bash state=present
+
 - name: The /opt directory must exist
   file: path=/opt owner=root group=root mode=0755 state=directory
+
+- name: The /var/log/torquebox directory must exist
+  file: path=/var/log/torquebox owner=torquebox mode=0755 state=directory
+
+- name: The /var/run/torquebox directory must exist
+  file: path=/var/run/torquebox owner=torquebox mode=0755 state=directory
 
 - name: Install Torquebox dependencies
   apt: pkg={{ item }} state=installed
@@ -8,6 +17,11 @@
     - openjdk-7-jre
     - curl
 
+- name: Install service configuration file for Torquebox into /etc/defaults
+  copy: src=torquebox.default dest=/etc/default/torquebox
+
+- name: Install init script for Torquebox file into /etc/init.d
+  copy: src=torquebox.init dest=/etc/init.d/torquebox mode=0755
 
 
 # Continue porting from debuntu to ansible when there is time. the stuff below works fine already.
@@ -20,11 +34,8 @@
 #- name: Link /opt/torquebox-{{ version }} to /opt/torquebox
 #  file: state=link src=/opt/torquebox-{{ version }} dest=/opt/torquebox
 
-#- name: Ensure torquebox user is present
-#  user: name=torquebox shell=/bin/bash state=present
 
 #- name: Change owner of torquebox installation to torquebox user
 #  file: path=/opt/torquebox-{{ version }} owner=torquebox recurse=yes state=directory
 
 #- name: Ensure Torquebox profile snippet is installed
-#  copy: src=torquebox_profile.sh dest=/etc/profile.d/torquebox_profile.sh mode=755

@@ -1,0 +1,33 @@
+[webservers]
+rails.zhdk.ch.vm
+
+[madek_servers]
+rails.zhdk.ch.vm
+arch.ethz.madek.zhdk.ch.vm
+
+[mariadb_servers]
+cislave1.zhdk.ch.vm
+cislave2.zhdk.ch.vm
+
+
+# Continuous Integration (CI)
+[jenkins_masters]
+ci.zhdk.ch.vm
+
+[domina_masters]
+ci2.zhdk.ch.vm
+
+[ci_slaves]
+cislave1.zhdk.ch.vm
+cislave2.zhdk.ch.vm
+
+
+
+# Developer virtual machines
+[developer_vms:children]
+developer_vm_leihs
+developer_vm_madek
+
+[developer_vm_leihs]
+
+[developer_vm_madek]
