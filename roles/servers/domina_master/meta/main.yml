@@ -1,6 +1,7 @@
 ---
 dependencies:
   - { role: common }
+  - { role: servers/web }
   - { role: configuration/utf8_locale }
   - { role: servers/postgresql, enable_trigram: true }
   - { role: ntp_client }
