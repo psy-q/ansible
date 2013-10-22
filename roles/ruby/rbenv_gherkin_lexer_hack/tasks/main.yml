@@ -2,7 +2,7 @@
 # This doesn't work -- the gem module can't work if we use rbenv
 #- name: Install gherkin gem so we can hack it
 #  gem: name=gherkin version=2.12.0 state=present
-- name: Install gherkin
+- name: Install gherkin (using rbenv)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem install gherkin -v 2.12.0'
@@ -10,12 +10,12 @@
   apt: pkg=ragel state=installed
 
 # Can't compile the gherkin lexer otherwise
-- name: Update RubyGems
+- name: Update RubyGems (using rbenv)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem update --system'
 
-- name: Recompile gherkin lexer
+- name: Recompile gherkin lexer (using rbenv)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && cd $(dirname `gem which gherkin`)/.. && bundle install && bundle exec rake compile:gherkin_lexer_en compile:gherkin_lexer_de'

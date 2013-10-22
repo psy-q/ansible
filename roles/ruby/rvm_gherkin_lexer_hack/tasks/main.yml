@@ -2,14 +2,14 @@
 # This doesn't work -- the gem module can't work if we use rbenv
 #- name: Install gherkin gem so we can hack it
 #  gem: name=gherkin version=2.12.0 state=present
-- name: Install gherkin
+- name: Install gherkin (using RVM)
   shell: bash -l -c 'gem install gherkin -v 2.12.0'
 - name: Install Ragel parser
   apt: pkg=ragel state=installed
 
 # Can't compile the gherkin lexer otherwise
-- name: Update RubyGems
+- name: Update RubyGems (using RVM)
   shell: bash -l -c 'gem update --system'
 
-- name: Recompile gherkin lexer
+- name: Recompile gherkin lexer (using RVM)
   shell: bash -l -c '{{choose_ruby_command}} {{ ruby_version }} && cd $(dirname `gem which gherkin`)/..  && bundle install && bundle exec rake compile:gherkin_lexer_en compile:gherkin_lexer_de'
