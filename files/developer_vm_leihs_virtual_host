@@ -1,8 +1,8 @@
 <VirtualHost *:80>
    ServerName leihs.vm
-   DocumentRoot /home/leihs/source/public/
+   DocumentRoot /home/developer/leihs/public/
 
-   <Directory /home/leihs/source/public>
+   <Directory /home/developer/leihs/public>
       AllowOverride all
       Options -MultiViews
    </Directory>
@@ -10,10 +10,10 @@
 
 <VirtualHost *:80>
    ServerName dev.leihs.vm
-   DocumentRoot /home/leihs/source/public/
+   DocumentRoot /home/developer/leihs/public/
    RailsEnv development
 
-   <Directory /home/leihs/source/public>
+   <Directory /home/developer/leihs/public>
       AllowOverride all
       Options -MultiViews
    </Directory>
