@@ -25,11 +25,6 @@
   tags:
     - packages
 
-- name: register ruby version variable
-  command: bash -lc 'rvm current'
-  register: ruby_version
-
-
 - name: Check if passenger gem is installed
   command: bash -lc 'gem list passenger -v 4.0.20 --installed'
   register: passenger_gem_is_installed

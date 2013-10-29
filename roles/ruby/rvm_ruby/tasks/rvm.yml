@@ -9,7 +9,7 @@
   when: rvm_is_installed|failed
   register: rvm_has_been_installed
 
-- name: Check if Ruby {{ ruby_version }} is installed
+- name: "RVM: Check if Ruby {{ ruby_version }} is installed"
   command: bash -l -c 'rvm list | grep {{ ruby_version }}'
   register: ruby_is_installed
   ignore_errors: True
@@ -19,16 +19,16 @@
   when: (rvm_is_installed|success or rvm_has_been_installed|success) and ruby_is_installed|failed
   register: ruby_has_been_installed
 
-- name: Check if Ruby {{ ruby_version }} has Bundler
+- name: "RVM: Check if Ruby {{ ruby_version }} has Bundler"
   command: executable=/bin/bash bash -l -c 'rvm use {{ ruby_version }} && gem list bundler | grep bundler'
   when: (rvm_has_been_installed|success or rvm_is_installed|success) and (ruby_is_installed|success or ruby_has_been_installed|success)
   register: bundler_is_installed
   ignore_errors: True
 
-- name: Install bundler for Ruby {{ ruby_version }}
+- name: "RVM: Install bundler for Ruby {{ ruby_version }}"
   command: executable=/bin/bash bash -l -c 'rvm use {{ ruby_version }} && gem install bundler'
   when: bundler_is_installed|failed
 
-- name: Set default ruby to {{ ruby_version }}
+- name: "RVM: Set default ruby to {{ ruby_version }}"
   command: executable=/bin/bash bash -l -c 'rvm alias create default {{ ruby_version }}'
   when: set_default

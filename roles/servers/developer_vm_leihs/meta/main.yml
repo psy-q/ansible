@@ -1,3 +1,5 @@
 ---
 dependencies:
   - { role: servers/developer_vms }
+  - { role: ruby/rvm_ruby }
+  - { role: ruby/rvm_gherkin_lexer_hack, ruby_version: 1.9.3-p448 }

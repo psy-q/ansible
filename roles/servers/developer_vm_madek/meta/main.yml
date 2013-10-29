@@ -1,4 +1,5 @@
 ---
 dependencies:
   - { role: servers/developer_vms }
+  - { role: ruby/rvm_ruby }
   - { role: servers/postgresql, enable_trigram: true }

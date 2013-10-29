@@ -12,4 +12,4 @@
   shell: bash -l -c 'gem update --system'
 
 - name: Recompile gherkin lexer (using RVM)
-  shell: bash -l -c '{{choose_ruby_command}} {{ ruby_version }} && cd $(dirname `gem which gherkin`)/..  && bundle install && bundle exec rake compile:gherkin_lexer_en compile:gherkin_lexer_de'
+  shell: bash -l -c 'rvm use {{ ruby_version }} && cd $(dirname `gem which gherkin`)/..  && bundle install && bundle exec rake compile:gherkin_lexer_en compile:gherkin_lexer_de'
