@@ -7,4 +7,4 @@ dependencies:
   - { role: binaries/phantomjs }
   - { role: binaries/chromedriver }
   - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.4, ruby_user: jenkins }
-  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins }
+  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins, set_default: true }
