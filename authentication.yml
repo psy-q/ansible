@@ -5,7 +5,7 @@
 - hosts: ci2.zhdk.ch
   tasks:
   - name: Authorize root users for ci2.zhdk.ch
-    authorized_key: user=root key={{ item }} state=present
+    authorized_key: user=root key="{{ item }}"
     with_file:
       - files/ssh_keys/rca.pub
       - files/ssh_keys/thomas.pub
@@ -16,7 +16,7 @@
 - hosts: ci.zhdk.ch
   tasks:
   - name: Authorize root users for ci.zhdk.ch
-    authorized_key: user=root key={{ item }} state=present
+    authorized_key: user=root key="{{ item }}" state=present
     with_file:
       - files/ssh_keys/rca.pub
       - files/ssh_keys/thomas.pub
@@ -27,7 +27,7 @@
 - hosts: developer_vms
   tasks:
   - name: Root users for developer VMs
-    authorized_key: user=root key={{ item }} state=present
+    authorized_key: user=root key="{{ item }}" state=present
     with_file:
       - files/ssh_keys/franco.pub
       - files/ssh_keys/matus.pub
@@ -35,7 +35,7 @@
       - files/ssh_keys/sebastian.pub
       - files/ssh_keys/thomas.pub
   - name: developer users for developer VMs
-    authorized_key: user=developer key={{ item }} state=present
+    authorized_key: user=developer key="{{ item }}" state=present
     with_file:
       - files/ssh_keys/franco.pub
       - files/ssh_keys/matus.pub
