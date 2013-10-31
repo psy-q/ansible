@@ -1,0 +1,28 @@
+# This role just makes sure that some directories etc. exist and have the correct permissions.
+# The role does not actually install any Torquebox binaries. We leave that to Debuntu or to
+# another role (binaries/torquebox).
+---
+- name: Ensure torquebox user is present
+  user: name=torquebox shell=/bin/bash state=present
+
+- name: The /opt directory must exist
+  file: path=/opt owner=root group=root mode=0755 state=directory
+
+- name: The /var/log/torquebox directory must exist
+  file: path=/var/log/torquebox owner=torquebox mode=0755 state=directory
+
+- name: The /var/run/torquebox directory must exist
+  file: path=/var/run/torquebox owner=torquebox mode=0755 state=directory
+
+- name: Install Torquebox dependencies
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - openjdk-7-jre
+    - curl
+
+- name: Install service configuration file for Torquebox into /etc/defaults
+  copy: src=torquebox.default dest=/etc/default/torquebox
+
+- name: Install init script for Torquebox file into /etc/init.d
+  copy: src=torquebox.init dest=/etc/init.d/torquebox mode=0755
+

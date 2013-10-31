@@ -1,0 +1,3 @@
+TORQUEBOX_SERVER=standalone.xml
+TORQUEBOX_HOME=/opt/torquebox
+RUN=yes
