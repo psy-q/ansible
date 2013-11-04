@@ -3,7 +3,7 @@
   roles:
     - servers/developer_vm_leihs
     - servers/mariadb
-    - iceweasel_latest
+    - configuration/iceweasel_latest
     - binaries/chromedriver
     - binaries/phantomjs
     - servers/rails

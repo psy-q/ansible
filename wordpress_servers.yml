@@ -1,4 +1,4 @@
 ---
 - hosts: wordpress_servers
   roles:
-    - wordpress
+    - configuration/prerequisites/wordpress

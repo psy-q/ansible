@@ -4,13 +4,13 @@ dependencies:
   - { role: servers/web }
   - { role: configuration/utf8_locale }
   - { role: servers/postgresql, enable_trigram: true }
-  - { role: ntp_client }
-  - { role: remote_display }
+  - { role: configuration/ntp_client }
+  - { role: configuration/remote_display }
   - { role: binaries/chromedriver }
   - { role: binaries/phantomjs }
-  - { role: iceweasel_latest }
+  - { role: configuration/iceweasel_latest }
   - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: domina }
   - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: domina }
   - { role: ruby/rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448, ruby_user: domina }
   - { role: binaries/debuntu }
-  - { role: configuration/torquebox }
+  - { role: configuration/prerequisites/torquebox }

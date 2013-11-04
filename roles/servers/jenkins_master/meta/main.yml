@@ -2,8 +2,8 @@
 dependencies:
   - { role: common }
   - { role: configuration/utf8_locale }
-  - { role: ntp_client }
-  - { role: iceweasel_latest }
+  - { role: configuration/ntp_client }
+  - { role: configuration/iceweasel_latest }
   - { role: binaries/phantomjs }
   - { role: binaries/chromedriver }
   - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.4, ruby_user: jenkins }

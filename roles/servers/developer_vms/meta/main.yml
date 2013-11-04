@@ -3,4 +3,4 @@ dependencies:
   - { role: common }
   - { role: servers/web }
   - { role: configuration/utf8_locale }
-  - { role: remote_display }
+  - { role: configuration/remote_display }
