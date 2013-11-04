@@ -3,7 +3,8 @@ dependencies:
   - { role: common }
   - { role: servers/web }
   - { role: configuration/utf8_locale }
-  - { role: servers/postgresql, enable_trigram: true }
+# This is instead managed by Debuntu scripts
+#  - { role: servers/postgresql, enable_trigram: true }
   - { role: configuration/ntp_client }
   - { role: configuration/remote_display }
   - { role: binaries/chromedriver }
