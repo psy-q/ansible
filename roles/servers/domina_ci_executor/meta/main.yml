@@ -1,4 +1,16 @@
 ---
 dependencies:
   - { role: common }
+  - { role: configuration/utf8_locale }
+  - { role: servers/postgresql, enable_trigram: true }
+  - { role: configuration/ntp_client }
+  - { role: configuration/remote_display }
+  - { role: binaries/chromedriver }
+  - { role: binaries/phantomjs }
   - { role: binaries/debuntu }
+  - { role: configuration/iceweasel_latest }
+  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins, set_default: true }
+  - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: domina, set_default: true }
+  - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: jenkins }
+  - { role: ruby/rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448}
+  - { role: servers/domina_ci_executor, user: domina }
