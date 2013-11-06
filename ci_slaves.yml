@@ -3,6 +3,10 @@
   roles:
     - servers/ci_slaves
 
+- hosts: domina_ci_executors
+  roles:
+    - servers/domina_ci_executor
+
 # The CI slaves need packages and stuff from Madek as well as leihs
   tasks:
     - include: roles/servers/madek/tasks/packages.yml

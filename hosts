@@ -37,6 +37,8 @@ ci2.zhdk.ch
 cislave1.zhdk.ch
 cislave2.zhdk.ch
 
+[domina_ci_executors]
+cislave1.zhdk.ch
 
 # Developer virtual machines
 [developer_vms:children]

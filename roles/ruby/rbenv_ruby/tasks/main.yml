@@ -49,7 +49,7 @@
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{ rbenv_root.stdout }}/plugins/ruby-build
   when: rbenv_is_installed|failed
 
-- name: Install rbenv .profile snippet (1/2)
+- name: Install rbenv .profile snippet for user {{ ruby_user }} (1/2)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   lineinfile:
@@ -60,7 +60,7 @@
     create: yes
   when: rbenv_is_installed|failed
 
-- name: Install rbenv .profile snippet (2/2)
+- name: Install rbenv .profile snippet for user {{ ruby_user }} (2/2)
   sudo: True
   sudo_user: "{{ ruby_user }}"
   lineinfile:
@@ -72,21 +72,21 @@
     create: yes
   when: rbenv_is_installed|failed
 
-- name: "rbenv: Check if Ruby {{ ruby_version }} is installed"
+- name: "rbenv: Check if Ruby {{ ruby_version }} is installed for user {{ ruby_user }}"
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv versions | grep {{ ruby_version }}'
   register: ruby_is_installed
   ignore_errors: True
 
-- name: "rbenv: Install rbenv Ruby {{ ruby_version }}"
+- name: "rbenv: Install rbenv Ruby {{ ruby_version }} for user {{ ruby_user }}"
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv install {{ ruby_version }}'
   when: (rbenv_is_installed|success or rbenv_has_been_installed|success) and ruby_is_installed|failed
   register: ruby_has_been_installed
 
-- name: "rbenv: Check if Ruby {{ ruby_version }} has Bundler"
+- name: "rbenv: Check if Ruby {{ ruby_version }} user {{ ruby_user }} has Bundler"
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem list bundler | grep bundler'
@@ -94,7 +94,7 @@
   register: bundler_is_installed
   ignore_errors: True
 
-- name: "rbenv: Install bundler for Ruby {{ ruby_version }}"
+- name: "rbenv: Install bundler for Ruby {{ ruby_version }} of user {{ ruby_user }}"
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem install bundler'

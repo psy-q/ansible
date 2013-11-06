@@ -3,6 +3,7 @@
   apt: pkg={{ item }} state=present
   with_items:
     - curl
+    - python-mysqldb
 
 - name: Make sure {{ user }} exists
   user: name={{ user }} shell=/bin/bash state=present
@@ -22,3 +23,10 @@
   sudo: True
   sudo_user: "{{ user }}"
   command: bash -l -c 'debuntu_jvm_leiningen_install'
+
+- name: Give privileges to create leihs test databases to the domina MariaDB user
+  mysql_user:
+    name: domina
+    password: domina
+    priv: 'leihs_test%.*:ALL'
+
