@@ -1,6 +1,7 @@
 ---
 dependencies:
   - { role: common }
+  - { role: binaries/debuntu }
   - { role: servers/ci_slaves }
   - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: domina, set_default: true }
   - { role: ruby/rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448, ruby_user: domina }
