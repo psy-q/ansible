@@ -4,5 +4,5 @@
   with_items:
     - curl
 
-- name: Install debuntu functions into profile.d
-  template: src=debuntu_fun.sh.j2 dest=/etc/profile.d/debuntu_fun.sh mode=755
+- name: Install debuntu script into /usr/local/bin 
+  template: src=debuntu_fun.sh.j2 dest=/usr/local/bin/debuntu_fun.sh mode=755

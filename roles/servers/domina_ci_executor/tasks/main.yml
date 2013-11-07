@@ -17,12 +17,12 @@
 - name: Install Domina CI Executor using debuntu
   sudo: True
   sudo_user: "{{ user }}"
-  command: chdir={{rbenv_root.stdout}} bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} debuntu_ci_domina-ci-executor_install'
+  command: chdir={{rbenv_root.stdout}} bash -l -c 'debuntu_fun.sh && RBENV_ROOT={{ rbenv_root.stdout }} debuntu_ci_domina-ci-executor_install'
 
 - name: Install Leiningen using debuntu
   sudo: True
   sudo_user: "{{ user }}"
-  command: bash -l -c 'debuntu_jvm_leiningen_install'
+  command: bash -l -c 'debuntu_fun.sh && debuntu_jvm_leiningen_install'
 
 - name: Give privileges to create leihs test databases to the domina MariaDB user
   mysql_user:
