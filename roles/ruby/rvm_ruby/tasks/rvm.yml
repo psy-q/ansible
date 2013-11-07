@@ -9,6 +9,10 @@
   when: rvm_is_installed|failed
   register: rvm_has_been_installed
 
+- name: Install a JRE if jRuby needs to be installed
+  apt: pkg=openjdk-7-jre state=present
+  when: ruby_version[:5] == "jruby"
+
 - name: "RVM: Check if Ruby {{ ruby_version }} is installed"
   command: bash -l -c 'rvm list | grep {{ ruby_version }}'
   register: ruby_is_installed

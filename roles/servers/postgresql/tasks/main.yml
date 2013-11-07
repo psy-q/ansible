@@ -1,9 +1,40 @@
 ---
-- name: Install PostgreSQL
-  apt: pkg={{ item }} state=present
+- name: 'Add official PostgreSQL repository for newer PostgreSQL versions in case version 9.2 or 9.3 were requested'
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main' state=present 
+  when: version == 9.2 or version == 9.3
+
+- name: Add GPG key for official PostgreSQL packages
+  apt_key: id=ACCC4CF8 url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
+
+- name: Ensure absence of PostgreSQL version 9.1 since we install {{ version }} 
+  apt: pkg={{ item }} state=absent
   with_items:
-    - postgresql
-    - postgresql-client
+    - postgresql-9.1
+    - postgresql-client-9.1
+  environment: "{{ locale_env }}"
+  when: exclusive == True and (version == 9.2 or version == 9.3)
+
+- name: Ensure absence of PostgreSQL version 9.2 since we install {{ version }} 
+  apt: pkg={{ item }} state=absent
+  with_items:
+    - postgresql-9.2
+    - postgresql-client-9.2
+  environment: "{{ locale_env }}"
+  when: exclusive == True and (version == 9.3 or version == 9.1)
+
+- name: Ensure absence of PostgreSQL version 9.3 since we install {{ version }} 
+  apt: pkg={{ item }} state=absent
+  with_items:
+    - postgresql-9.3
+    - postgresql-client-9.3
+  environment: "{{ locale_env }}"
+  when: exclusive == True and (version == 9.1 or version == 9.2)
+
+- name: Install PostgreSQL
+  apt: pkg={{ item }} state=present update_cache=true
+  with_items:
+    - postgresql-{{ version }}
+    - postgresql-client-{{ version }}
     - libpq-dev
     - python-psycopg2
   notify: restart postgresql
@@ -15,8 +46,8 @@
   environment: "{{ locale_env }}"
 
 # Trigram extension
-- name: Install postgresql-contrib because the Trigram extension is needed
-  apt: pkg=postgresql-contrib state=present
+- name: Install postgresql-contrib for PostgreSQL {{ version }} because the Trigram extension is needed
+  apt: pkg=postgresql-contrib-{{ version }} state=present
   when: enable_trigram
   environment: "{{ locale_env }}"
 

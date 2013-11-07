@@ -34,7 +34,6 @@ ci2.zhdk.ch
 192.168.56.102
 
 [ci_slaves]
-cislave1.zhdk.ch
 cislave2.zhdk.ch
 
 [domina_ci_executors]
