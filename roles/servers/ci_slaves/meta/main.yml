@@ -10,4 +10,4 @@ dependencies:
   - { role: configuration/iceweasel_latest }
   - { role: ruby/rbenv_ruby, ruby_version: 1.9.3-p448, ruby_user: jenkins, set_default: true }
   - { role: ruby/rbenv_ruby, ruby_version: jruby-1.7.2, ruby_user: jenkins }
-  - { role: ruby/rbenv_gherkin_lexer_hack, ruby_version: 1.9.3-p448}
+  - { role: ruby/rbenv_gherkin_lexer_hack, ruby_user: jenkins, ruby_version: 1.9.3-p448}
