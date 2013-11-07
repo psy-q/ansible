@@ -2,7 +2,7 @@
 dependencies:
   - { role: common }
   - { role: configuration/utf8_locale }
-  - { role: servers/postgresql, enable_trigram: true }
+  - { role: servers/postgresql, enable_trigram: true, version: 9.2 }
   - { role: configuration/ntp_client }
   - { role: configuration/remote_display }
   - { role: binaries/chromedriver }
