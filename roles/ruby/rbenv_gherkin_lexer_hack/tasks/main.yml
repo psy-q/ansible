@@ -6,6 +6,7 @@
   sudo: True
   sudo_user: "{{ ruby_user }}"
   command: chdir={{ rbenv_root.stdout }} executable=/bin/bash bash -l -c 'RBENV_ROOT={{ rbenv_root.stdout }} rbenv shell {{ ruby_version }} && rbenv rehash && gem install gherkin -v 2.12.0'
+
 - name: Install Ragel parser
   apt: pkg=ragel state=installed
 
