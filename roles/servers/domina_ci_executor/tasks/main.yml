@@ -4,6 +4,7 @@
   with_items:
     - curl
     - python-mysqldb
+    - screen
 
 - name: Make sure {{ user }} exists
   user: name={{ user }} shell=/bin/bash state=present
