@@ -25,11 +25,9 @@ ci.zhdk.ch.vm
 [domina_masters]
 ci2.zhdk.ch.vm
 
-[ci_slaves]
-cislave2.zhdk.ch.vm
-
 [domina_ci_executors]
 cislave1.zhdk.ch.vm
+cislave2.zhdk.ch.vm
 
 # Developer virtual machines
 [developer_vms:children]

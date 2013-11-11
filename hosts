@@ -33,11 +33,9 @@ ci.zhdk.ch
 ci2.zhdk.ch
 192.168.56.102
 
-[ci_slaves]
-cislave2.zhdk.ch
-
 [domina_ci_executors]
 cislave1.zhdk.ch
+cislave2.zhdk.ch
 
 # Developer virtual machines
 [developer_vms:children]
