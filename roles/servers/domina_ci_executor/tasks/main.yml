@@ -25,9 +25,23 @@
   sudo_user: "{{ user }}"
   command: bash -l -c 'source /usr/local/bin/debuntu_fun.sh && debuntu_jvm_leiningen_install'
 
+- name: Make sure domina user exists
+  user: name=domina shell=/bin/bash state=present
+
+- name: Make sure a log directory exists for the Domina daemon
+  file: path=/var/log/domina owner=domina group=root mode=0755 state=directory
+
+- name: Install domina-ci-executor init script
+  copy: src=domina-ci-executor dest=/etc/init.d/domina-ci-executor mode=0755
+
+- name: Link domina initscript to default runlevels
+  command: insserv domina-ci-executor
+
 - name: Give privileges to create leihs test databases to the domina MariaDB user
   mysql_user:
     name: domina
     password: domina
     priv: 'leihs_test%.*:ALL'
+
+
 
