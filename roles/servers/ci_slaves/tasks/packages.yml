@@ -1,13 +1,11 @@
 ---
-- name: Install Java (OpenJDK)
-  apt: pkg=openjdk-7-jre state=installed
-- name: Install unzip
-  apt: pkg=unzip state=installed
-- name: Install zip
-  apt: pkg=zip state=installed
-- name: Install Chromium
-  apt: pkg=chromium state=installed
-- name: Install Curl
-  apt: pkg=curl state=installed
-- name: Install sudo
-  apt: pkg=sudo state=installed
+- name: Install packages required on CI slaves
+  apt: pkg={{ item }}
+  with_items:
+    - openjdk-7-jre
+    - zip
+    - unzip
+    - chromium
+    - curl
+    - sudo
+    - daemon
